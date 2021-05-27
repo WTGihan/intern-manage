@@ -1,0 +1,39 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "userType": "Student",
+      "username": "WTGihan",
+      "email": "wtgihan@gmail.com",
+      "phone": "111"
+    }
+  ],
+  "students": [
+    {
+      "id": 1,
+      "username": "WTGihan",
+      "adminAcception": "NotAccepted",
+      "studentName": "Tharindu Gihan",
+      "email": "wtgihan@gmail.com",
+      "contactnumber": "0778522736",
+      "university": "University of Colombo School of Computing",
+      "languageSkill": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, ab.",
+      "softSkill": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, ab.",
+      "projects": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, ab."
+    }
+  ],
+  "companies": [
+    {
+      "id": 1,
+      "username": "WTGihan",
+      "adminAcception": "NotAccepted",
+      "companyAdminName": "Tharindu Gihan",
+      "email": "wtgihan@gmail.com",
+      "contactnumber": "0778522736",
+      "company": "University of Colombo School of Computing",
+      "technologies": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, ab.",
+      "qualificationAndExperience": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, ab.",
+      "aboutCompany": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, ab."
+    }
+  ]
+}
