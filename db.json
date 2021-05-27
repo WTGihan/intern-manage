@@ -3,9 +3,14 @@
     {
       "id": 1,
       "userType": "Student",
-      "username": "WTGihan",
       "email": "wtgihan@gmail.com",
-      "phone": "111"
+      "password": "1111"
+    },
+    {
+      "userType": "Student",
+      "email": "w.tharindu.gihan.lk@gmail.com",
+      "password": "2222",
+      "id": 2
     }
   ],
   "students": [

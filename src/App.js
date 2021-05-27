@@ -12,6 +12,11 @@ import CompanyHome from "./components/pages/company/CompanyHome";
 import StudentHome from "./components/pages/student/StudentHome";
 
 function App() {
+  // const [user, setUser] = useState({
+  //   email:"",
+  //   p
+  // })
+
   return (
     <Router>
       <div className="App">
