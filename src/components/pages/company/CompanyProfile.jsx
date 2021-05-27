@@ -1,7 +1,31 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { Link, useParams } from "react-router-dom";
 
 function CompanyProfile() {
+  const [company, setCompany] = useState({
+    username: "",
+    adminAcception: "",
+    companyAdminName: "",
+    email: "",
+    contactnumber: "",
+    company: "",
+    technologies: "",
+    qualificationAndExperience: "",
+    aboutCompany: "",
+  });
+
+  const { id } = useParams();
+
+  useEffect(() => {
+    loadCompany();
+  }, []);
+
+  const loadCompany = async () => {
+    const result = await axios.get(`http://localhost:3004/companies/${id}`);
+    setCompany(result.data);
+  };
+
   return (
     <div className="container  w-50 m-auto">
       <div className="py-4">
@@ -13,11 +37,8 @@ function CompanyProfile() {
               <input
                 type="text"
                 className="form-control"
-                // placeholder="Enter Username"
-                name="name"
-                value="WolfXCode"
+                value={company.username}
                 readOnly
-                // onChange={(e) => onInputChange(e)}
               />
             </div>
           </div>
@@ -29,11 +50,8 @@ function CompanyProfile() {
               <input
                 type="text"
                 className="form-control"
-                // placeholder="Enter Username"
-                name="name"
-                value="NotAccepted"
+                value={company.adminAcception}
                 readOnly
-                // onChange={(e) => onInputChange(e)}
               />
             </div>
           </div>
@@ -45,11 +63,8 @@ function CompanyProfile() {
               <input
                 type="text"
                 className="form-control"
-                placeholder="Enter Username"
-                name="name"
-                value="Tharindu Gihan"
+                value={company.companyAdminName}
                 readOnly
-                // onChange={(e) => onInputChange(e)}
               />
             </div>
           </div>
@@ -59,12 +74,8 @@ function CompanyProfile() {
               <input
                 type="text"
                 className="form-control"
-                placeholder="Enter Username"
-                name="name"
-                value="wolfxcodedevelop@gmail.com"
+                value={company.email}
                 readOnly
-                // value={name}
-                // onChange={(e) => onInputChange(e)}
               />
             </div>
           </div>
@@ -76,12 +87,8 @@ function CompanyProfile() {
               <input
                 type="text"
                 className="form-control"
-                placeholder="Enter Password"
-                name="username"
-                value="0778522736"
+                value={company.contactnumber}
                 readOnly
-                // value={username}
-                // onChange={(e) => onInputChange(e)}
               />
             </div>
           </div>
@@ -91,12 +98,8 @@ function CompanyProfile() {
               <input
                 type="text"
                 className="form-control"
-                placeholder="Enter Password"
-                name="username"
-                value="WolfXCode Lab"
+                value={company.company}
                 readOnly
-                // value={username}
-                // onChange={(e) => onInputChange(e)}
               />
             </div>
           </div>
@@ -105,13 +108,8 @@ function CompanyProfile() {
             <div className="col-sm-8">
               <textarea
                 className="form-control"
-                placeholder="Required example textarea"
-                name="username"
-                value=" 1. Reactjs
-                        2. Node.js
-                        3. Java"
+                value={company.technologies}
                 readOnly
-                // required
               />
             </div>
           </div>
@@ -122,11 +120,8 @@ function CompanyProfile() {
             <div className="col-sm-8">
               <textarea
                 className="form-control"
-                placeholder="Required example textarea"
-                name="username"
-                value="Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, ab."
+                value={company.qualificationAndExperience}
                 readOnly
-                // required
               />
             </div>
           </div>
@@ -135,30 +130,35 @@ function CompanyProfile() {
             <div className="col-sm-8">
               <textarea
                 className="form-control"
-                placeholder="Required example textarea"
-                name="username"
-                value="Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, ab."
+                value={company.aboutCompany}
                 readOnly
-                // required
               />
             </div>
           </div>
 
-          <div className="btn-group mr-2">
-            <Link className="btn btn-secondary" to="/company-profile">
-              Apply
-            </Link>
-          </div>
-          <div className="btn-group mr-2">
-            <Link className="btn btn-primary" to="/company-profile/edit">
-              Edit
-            </Link>
-          </div>
-          <div className="btn-group mr-2">
-            <Link className="btn btn-danger" to="/">
-              Delete
-            </Link>
-          </div>
+          {id && (
+            <React.Fragment>
+              <div className="btn-group mr-2">
+                <Link className="btn btn-secondary" to="/company-profile">
+                  Apply For Company
+                </Link>
+              </div>
+            </React.Fragment>
+          )}
+          {!id && (
+            <React.Fragment>
+              <div className="btn-group mr-2">
+                <Link className="btn btn-primary" to="/company-profile/edit">
+                  Edit
+                </Link>
+              </div>
+              <div className="btn-group mr-2">
+                <Link className="btn btn-danger" to="/">
+                  Delete
+                </Link>
+              </div>
+            </React.Fragment>
+          )}
         </form>
       </div>
     </div>

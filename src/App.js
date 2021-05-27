@@ -26,6 +26,11 @@ function App() {
           <Route exact path="/signup" component={SignUp}></Route>
           <Route exact path="/about" component={About}></Route>
           <Route exact path="/companies" component={CompanyHome}></Route>
+          <Route
+            exact
+            path="/company/view/:id"
+            component={CompanyProfile}
+          ></Route>
           <Route exact path="/" component={StudentHome}></Route>
           <Route
             exact

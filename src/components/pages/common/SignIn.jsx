@@ -12,13 +12,12 @@ function SignIn() {
   });
 
   const onInputChange = (e) => {
-    // console.log(e.target.value);
     setUser({ ...user, [e.target.name]: e.target.value });
   };
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    // console.log(user);
+
     const result = await axios.get("http://localhost:3004/users");
     const users = result.data;
     let validUser = false;
