@@ -1,5 +1,4 @@
 import React from "react";
-import logoImg from "../../img/wolflogo.jpg";
 import { Link, NavLink } from "react-router-dom";
 
 function Navbar() {
@@ -36,33 +35,33 @@ function Navbar() {
                 About
               </NavLink>
             </li>
-            {/* <li className="nav-item">
-              <NavLink className="nav-link" exact to="/profile">
-                Profile
+            <li className="nav-item">
+              <NavLink className="nav-link" exact to="/student-profile">
+                Student Profile
               </NavLink>
-            </li> */}
-            {/* <li className="nav-item">
-              <NavLink className="nav-link" exact to="/profile">
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" exact to="/company-profile">
                 Company Profile
               </NavLink>
-            </li> */}
+            </li>
           </ul>
         </div>
-        {/* <div className="btn-group mr-2">
-          <Link className="btn btn-outline-primary setmargin" to="/users/add">
+        <div className="btn-group mr-2">
+          <Link className="btn btn-outline-primary" to="/signin">
             Sign In
           </Link>
         </div>
         <div className="btn-group mr-2">
-          <Link className="btn btn-outline-primary" to="/users/add">
+          <Link className="btn btn-outline-primary" to="/signup">
             Sign Up
           </Link>
-        </div> */}
-        <div className="btn-group mr-2">
+        </div>
+        {/* <div className="btn-group mr-2">
           <Link className="btn btn-outline-primary" to="/">
             Logout
           </Link>
-        </div>
+        </div> */}
       </div>
     </nav>
   );
