@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import passwordHash from "password-hash";
 
 function SignIn() {
   let history = useHistory();
@@ -23,11 +24,14 @@ function SignIn() {
     let validUser = false;
 
     users.forEach((person) => {
-      if (person.email === user.email && person.password === user.password) {
+      if (
+        person.email === user.email &&
+        passwordHash.verify(user.password, person.password)
+      ) {
         validUser = true;
       }
     });
-    // console.log(validUser);
+
     if (validUser === true) {
       history.push("/");
     } else {
@@ -40,7 +44,6 @@ function SignIn() {
   };
 
   const { email, password } = user;
-  // console.log(user);
 
   return (
     <div className="container  w-50 m-auto">
@@ -76,7 +79,7 @@ function SignIn() {
             </div>
           </div>
           <button type="submit" className="btn btn-primary">
-            Submit
+            Login
           </button>
         </form>
       </div>

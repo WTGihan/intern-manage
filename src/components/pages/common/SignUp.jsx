@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import passwordHash from "password-hash";
 
 function SignUp() {
   let history = useHistory();
@@ -11,15 +12,18 @@ function SignUp() {
   });
 
   const onInputChange = (e) => {
-    // console.log(e.target.value);
     createUser({ ...newuser, [e.target.name]: e.target.value });
   };
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    // console.log(newuser);
-    await axios.post("http://localhost:3004/users", newuser);
-    history.push("/");
+
+    let result = [];
+    result = { ...newuser };
+    result["password"] = passwordHash.generate(result["password"]);
+
+    await axios.post("http://localhost:3004/users", result);
+    history.replace("/");
   };
 
   const { userType, email, password } = newuser;
@@ -74,7 +78,7 @@ function SignUp() {
             </div>
           </div>
           <button type="submit" className="btn btn-primary">
-            Submit
+            Create
           </button>
         </form>
       </div>

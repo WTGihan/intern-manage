@@ -8,14 +8,14 @@
     },
     {
       "userType": "Student",
-      "email": "w.tharindu.gihan.lk@gmail.com",
-      "password": "2222",
+      "email": "wtgihan@gmail.com",
+      "password": "sha1$d22b4f94$1$ea82c90a110420d49d4fdecbb4788a2261ffba26",
       "id": 2
     },
     {
-      "userType": "Select User Type",
-      "email": "",
-      "password": "",
+      "userType": "Student",
+      "email": "w.tharindu.gihan.lk@gmail.com",
+      "password": "sha1$c8310fd8$1$72e9c72033192fd3fb23c1e60a6e86d8317753a9",
       "id": 3
     }
   ],
