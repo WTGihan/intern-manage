@@ -28,7 +28,7 @@ function SignUp() {
     <div className="container  w-50 m-auto">
       <div className="py-4">
         <h1 className="text-center setmargin">Create New User</h1>
-        <form className="mx-auto">
+        <form className="mx-auto" onSubmit={(e) => onSubmit(e)}>
           <div className="form-group row">
             <label className="col-sm-4 col-form-label">User Type</label>
             <div className="col-sm-8">
@@ -36,6 +36,7 @@ function SignUp() {
                 className="form-control"
                 name="userType"
                 onChange={(e) => onInputChange(e)}
+                required
               >
                 <option value={userType}>{userType}</option>
                 <option value="Student">Student</option>
@@ -54,6 +55,7 @@ function SignUp() {
                 name="email"
                 value={email}
                 onChange={(e) => onInputChange(e)}
+                required
               />
             </div>
           </div>
@@ -71,11 +73,7 @@ function SignUp() {
               />
             </div>
           </div>
-          <button
-            type="submit"
-            className="btn btn-primary"
-            onClick={(e) => onSubmit(e)}
-          >
+          <button type="submit" className="btn btn-primary">
             Submit
           </button>
         </form>

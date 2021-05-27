@@ -11,6 +11,12 @@
       "email": "w.tharindu.gihan.lk@gmail.com",
       "password": "2222",
       "id": 2
+    },
+    {
+      "userType": "Select User Type",
+      "email": "",
+      "password": "",
+      "id": 3
     }
   ],
   "students": [

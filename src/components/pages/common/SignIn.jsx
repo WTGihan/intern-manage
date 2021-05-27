@@ -46,7 +46,7 @@ function SignIn() {
     <div className="container  w-50 m-auto">
       <div className="py-4">
         <h1 className="text-center setmargin">Login</h1>
-        <form className="mx-auto">
+        <form className="mx-auto" onSubmit={(e) => onSubmit(e)}>
           <div className="form-group row">
             <label className="col-sm-4 col-form-label">Username</label>
             <div className="col-sm-8">
@@ -75,11 +75,7 @@ function SignIn() {
               />
             </div>
           </div>
-          <button
-            type="submit"
-            className="btn btn-primary"
-            onClick={(e) => onSubmit(e)}
-          >
+          <button type="submit" className="btn btn-primary">
             Submit
           </button>
         </form>
