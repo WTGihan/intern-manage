@@ -4,19 +4,19 @@
       "userType": "Student",
       "email": "wtgihan@gmail.com",
       "password": "sha1$c8310fd8$1$72e9c72033192fd3fb23c1e60a6e86d8317753a9",
-      "id": 3
+      "id": 1
     },
     {
       "userType": "Company",
       "email": "wolfxcodedevelop@gmail.com",
       "password": "sha1$03c80d11$1$859b645f138aaece1835b24d0f9fd406c70879a4",
-      "id": 4
+      "id": 2
     },
     {
-      "userType": "Student",
-      "email": "sandeepa@gmail.com",
-      "password": "sha1$7098c137$1$8cc537ccdc41cdf99d342fe05382f0a4d648348e",
-      "id": 5
+      "userType": "Company",
+      "email": "anura@gmail.com",
+      "password": "sha1$7365c6a2$1$03029d848f5a57913d5d8ba9675d0c97b2fe6fe2",
+      "id": 4
     }
   ],
   "students": [
@@ -54,6 +54,7 @@
   "companies": [
     {
       "id": 1,
+      "useremail": "wolfxcodedevelop@gmail.com",
       "username": "WTGihan",
       "adminAcception": "NotAccepted",
       "companyAdminName": "Tharindu Gihan",
@@ -69,6 +70,19 @@
           "email": "wtgihan@gmail.com"
         }
       ]
+    },
+    {
+      "id": 2,
+      "useremail": "anura@gmail.com",
+      "username": "Hexacode",
+      "adminAcception": "NotAccepted",
+      "companyAdminName": "Anura Withanachchi",
+      "email": "hexacode@gmail.com",
+      "contactnumber": "09130908069",
+      "company": "HexaCode Developers",
+      "technologies": "1.React JS\n2.Mongo DB\n3.Java\n4.Springboot",
+      "qualificationAndExperience": "1.Computer science degree",
+      "aboutCompany": "1.Most accurate company\n2.Very consider output in time"
     }
   ]
 }

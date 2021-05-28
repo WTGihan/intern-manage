@@ -36,6 +36,9 @@ function SignUp() {
     if (result.userType === "Student") {
       window.location = "/student-create";
     }
+    if (result.userType === "Company") {
+      window.location = "/company-create";
+    }
   };
 
   const { userType, email, password } = newuser;

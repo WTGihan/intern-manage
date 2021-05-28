@@ -20,6 +20,7 @@ import Home from "./components/pages/common/Home";
 import Logout from "./components/pages/common/Logout";
 import StudentCreate from "./components/pages/student/StudentCreate";
 import StudentEdit from "./components/pages/student/StudentEdit";
+import CompanyCreate from "./components/pages/company/CompanyCreate";
 
 function App() {
   const [loginUser, setLoginUser] = useState([]);
@@ -47,25 +48,38 @@ function App() {
           <Route exact path="/signup" component={SignUp} />
           <Route exact path="/logout" component={Logout} />
           <Route exact path="/about" component={About} />
+          <Route
+            exact
+            path="/student-profile"
+            render={(props) => <StudentProfile loginUser={loginUser} />}
+          />
           <Route exact path="/student-create" component={StudentCreate} />
           <Route
             exact
             path="/student-profile/edit/:id"
             component={StudentEdit}
           />
-          <Route exact path="/company/view/:id" component={CompanyProfile} />
+          {/* <Route exact path="/company/view/:id" component={CompanyProfile} /> */}
+
+          {/* <Route exact path="/company-profile" component={CompanyProfile} /> */}
+          <Route exact path="/company-create" component={CompanyCreate} />
+          <Route
+            exact
+            path="/company-profile"
+            render={(props) => <CompanyProfile loginUser={loginUser} />}
+          />
+          <Route
+            exact
+            path="/company/view/:id"
+            render={(props) => <CompanyProfile loginUser={loginUser} />}
+          />
 
           <Route
             exact
             path="/"
             render={(props) => <Home loginUser={loginUser} />}
           />
-          <Route
-            exact
-            path="/student-profile"
-            render={(props) => <StudentProfile loginUser={loginUser} />}
-          />
-          <Route exact path="/company-profile" component={CompanyProfile} />
+
           <Route component={NotFound} />
         </Switch>
       </div>

@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link, useParams } from "react-router-dom";
 
-function CompanyProfile({ loginUser }) {
+function CompanyCreate() {
+  let result = JSON.parse(localStorage.getItem("loginUser"));
+  const email = result.email;
+
   const [company, setCompany] = useState({
+    id: "",
+    useremail: email,
     username: "",
-    adminAcception: "",
+    adminAcception: "NotAccepted",
     companyAdminName: "",
     email: "",
     contactnumber: "",
@@ -15,55 +19,40 @@ function CompanyProfile({ loginUser }) {
     aboutCompany: "",
   });
 
-  const { id } = useParams();
+  const onInputChange = (e) => {
+    setCompany({ ...company, [e.target.name]: e.target.value });
+  };
 
-  useEffect(() => {
-    loadCompany();
-  }, []);
+  //   useEffect(() => {
+  //     getuserId();
+  //   }, []);
 
-  const loadCompany = async () => {
-    if (id === undefined) {
-      const loginUseremail = loginUser.email;
-      const result = await axios.get("http://localhost:3004/companies");
-      const students = result.data;
-      const newresult = students.filter(
-        (data) => data.useremail === loginUseremail
-      );
-      newresult.forEach((data) => {
-        setCompany(data);
-      });
-    } else {
-      const result = await axios.get(`http://localhost:3004/companies/${id}`);
-      setCompany(result.data);
-    }
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    await axios.post("http://localhost:3004/companies", company);
+    let result = JSON.parse(localStorage.getItem("loginUser"));
+    const loginUser = {
+      email: result.email,
+      userType: result.userType,
+    };
+    localStorage.setItem("loginUser", JSON.stringify(loginUser));
+    window.location = "/";
   };
 
   return (
     <div className="container  w-50 m-auto">
       <div className="py-4">
-        <h1 className="text-center setmargin">Company Profile</h1>
-        <form className="mx-auto">
+        <h1 className="text-center setmargin">Student Profile</h1>
+        <form className="mx-auto" onSubmit={(e) => onSubmit(e)}>
           <div className="form-group row">
             <label className="col-sm-4 col-form-label">Username</label>
             <div className="col-sm-8">
               <input
                 type="text"
                 className="form-control"
+                name="username"
                 value={company.username}
-                readOnly
-              />
-            </div>
-          </div>
-          <div className="form-group row">
-            <label className="col-sm-4 col-form-label">
-              Campus Admin Acception
-            </label>
-            <div className="col-sm-8">
-              <input
-                type="text"
-                className="form-control"
-                value={company.adminAcception}
-                readOnly
+                onChange={(e) => onInputChange(e)}
               />
             </div>
           </div>
@@ -75,8 +64,9 @@ function CompanyProfile({ loginUser }) {
               <input
                 type="text"
                 className="form-control"
+                name="companyAdminName"
                 value={company.companyAdminName}
-                readOnly
+                onChange={(e) => onInputChange(e)}
               />
             </div>
           </div>
@@ -86,8 +76,9 @@ function CompanyProfile({ loginUser }) {
               <input
                 type="text"
                 className="form-control"
+                name="email"
                 value={company.email}
-                readOnly
+                onChange={(e) => onInputChange(e)}
               />
             </div>
           </div>
@@ -99,8 +90,9 @@ function CompanyProfile({ loginUser }) {
               <input
                 type="text"
                 className="form-control"
+                name="contactnumber"
                 value={company.contactnumber}
-                readOnly
+                onChange={(e) => onInputChange(e)}
               />
             </div>
           </div>
@@ -110,8 +102,9 @@ function CompanyProfile({ loginUser }) {
               <input
                 type="text"
                 className="form-control"
+                name="company"
                 value={company.company}
-                readOnly
+                onChange={(e) => onInputChange(e)}
               />
             </div>
           </div>
@@ -120,8 +113,9 @@ function CompanyProfile({ loginUser }) {
             <div className="col-sm-8">
               <textarea
                 className="form-control"
+                name="technologies"
                 value={company.technologies}
-                readOnly
+                onChange={(e) => onInputChange(e)}
               />
             </div>
           </div>
@@ -132,8 +126,9 @@ function CompanyProfile({ loginUser }) {
             <div className="col-sm-8">
               <textarea
                 className="form-control"
+                name="qualificationAndExperience"
                 value={company.qualificationAndExperience}
-                readOnly
+                onChange={(e) => onInputChange(e)}
               />
             </div>
           </div>
@@ -142,39 +137,20 @@ function CompanyProfile({ loginUser }) {
             <div className="col-sm-8">
               <textarea
                 className="form-control"
+                name="aboutCompany"
                 value={company.aboutCompany}
-                readOnly
+                onChange={(e) => onInputChange(e)}
               />
             </div>
           </div>
 
-          {id && (
-            <React.Fragment>
-              <div className="btn-group mr-2">
-                <Link className="btn btn-secondary" to="/company-profile">
-                  Apply For Company
-                </Link>
-              </div>
-            </React.Fragment>
-          )}
-          {!id && (
-            <React.Fragment>
-              <div className="btn-group mr-2">
-                <Link className="btn btn-primary" to="/company-profile/edit">
-                  Edit
-                </Link>
-              </div>
-              <div className="btn-group mr-2">
-                <Link className="btn btn-danger" to="/">
-                  Delete
-                </Link>
-              </div>
-            </React.Fragment>
-          )}
+          <div className="btn-group mr-2">
+            <button className="btn btn-primary">Create Company</button>
+          </div>
         </form>
       </div>
     </div>
   );
 }
 
-export default CompanyProfile;
+export default CompanyCreate;
