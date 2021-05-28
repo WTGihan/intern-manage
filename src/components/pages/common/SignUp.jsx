@@ -3,7 +3,7 @@ import axios from "axios";
 import { useHistory } from "react-router-dom";
 import passwordHash from "password-hash";
 
-function SignUp() {
+function SignUp({ setLoginUser, loginUser }) {
   let history = useHistory();
   const [newuser, createUser] = useState({
     userType: "Select User Type",
@@ -21,6 +21,11 @@ function SignUp() {
     let result = [];
     result = { ...newuser };
     result["password"] = passwordHash.generate(result["password"]);
+
+    setLoginUser([
+      ...loginUser,
+      { email: result.email, userType: result.userType },
+    ]);
 
     await axios.post("http://localhost:3004/users", result);
     history.replace("/");

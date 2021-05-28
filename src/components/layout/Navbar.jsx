@@ -4,9 +4,12 @@ import { Link, NavLink } from "react-router-dom";
 function Navbar({ loginUser }) {
   let userType = "";
   let email = "";
+
   loginUser.map((result) => {
     email = result.email;
     userType = result.userType;
+
+    return { email, userType };
   });
 
   return (

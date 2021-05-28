@@ -56,12 +56,18 @@ function App() {
           />
           <Route
             exact
+            path="/signup"
+            render={(props) => (
+              <SignUp setLoginUser={setLoginUser} loginUser={loginUser} />
+            )}
+          />
+          <Route
+            exact
             path="/logout"
             render={(props) => (
               <Logout setLoginUser={setLoginUser} loginUser={loginUser} />
             )}
           />
-          <Route exact path="/signup" component={SignUp}></Route>
           <Route exact path="/about" component={About}></Route>
           {/* <Route exact path="/companies" component={CompanyHome}></Route> */}
           <Route

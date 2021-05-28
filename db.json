@@ -17,6 +17,18 @@
       "email": "w.tharindu.gihan.lk@gmail.com",
       "password": "sha1$c8310fd8$1$72e9c72033192fd3fb23c1e60a6e86d8317753a9",
       "id": 3
+    },
+    {
+      "userType": "Company",
+      "email": "wolfxcodedevelop@gmail.com",
+      "password": "sha1$03c80d11$1$859b645f138aaece1835b24d0f9fd406c70879a4",
+      "id": 4
+    },
+    {
+      "userType": "CampusAdmin",
+      "email": "anura@gmail.com",
+      "password": "sha1$5a4baef7$1$4ae028855ee967ed98804cbcbee21f9ad08b5b76",
+      "id": 5
     }
   ],
   "students": [
@@ -31,7 +43,12 @@
       "languageSkill": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, ab.",
       "softSkill": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, ab.",
       "projects": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, ab.",
-      "applycompanies": [{ "id": 1, "email": "wolfxcodedevelop@gmail.com" }]
+      "applycompanies": [
+        {
+          "id": 1,
+          "email": "wolfxcodedevelop@gmail.com"
+        }
+      ]
     }
   ],
   "companies": [

@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import passwordHash from "password-hash";
-import Session from "react-session-api";
 
 function SignIn({ setLoginUser, loginUser }) {
   let history = useHistory();
