@@ -18,6 +18,7 @@ import NotFound from "./components/pages/common/NotFound";
 // import StudentHome from "./components/pages/student/StudentHome";
 import Home from "./components/pages/common/Home";
 import Logout from "./components/pages/common/Logout";
+import StudentCreate from "./components/pages/student/StudentCreate";
 
 function App() {
   const [loginUser, setLoginUser] = useState([]);
@@ -43,16 +44,12 @@ function App() {
         <Navbar loginUser={loginUser} />
         <Switch>
           <Route exact path="/signin" component={SignIn} />
-          <Route
-            exact
-            path="/signup"
-            render={(props) => (
-              <SignUp setLoginUser={setLoginUser} loginUser={loginUser} />
-            )}
-          />
+          <Route exact path="/signup" component={SignUp} />
+
           <Route exact path="/logout" render={(props) => <Logout />} />
           <Route exact path="/about" component={About}></Route>
-          {/* <Route exact path="/companies" component={CompanyHome}></Route> */}
+          <Route exact path="/student-create" component={StudentCreate}></Route>
+
           <Route
             exact
             path="/company/view/:id"

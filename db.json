@@ -23,6 +23,96 @@
       "email": "w.tharindu.gihan.lk@gmail.com",
       "password": "sha1$ef03cdbf$1$969271987126a43eab352ebbaa8d88d3147020cb",
       "id": 6
+    },
+    {
+      "userType": "Student",
+      "email": "thegoodstory1998@gmail.com",
+      "password": "sha1$1a99e4ba$1$3fb47ce01926af7795d5b477495beb163687b132",
+      "id": 7
+    },
+    {
+      "userType": "Company",
+      "email": "anura@gmail.com",
+      "password": "sha1$e13e66f5$1$07257d3b3e55ae14996838fa6a24a34c29b27ed7",
+      "id": 8
+    },
+    {
+      "userType": "Company",
+      "email": "anura@gmail.com",
+      "password": "sha1$2036cc3f$1$6f15fdd478a759dc7a72bab940bfb10036c42ae8",
+      "id": 9
+    },
+    {
+      "userType": "Company",
+      "email": "anura@gmail.com",
+      "password": "sha1$77b04d47$1$18f08a66a213da1539e3165d4f07e0cad0c3f135",
+      "id": 10
+    },
+    {
+      "userType": "Company",
+      "email": "anura@gmail.com",
+      "password": "sha1$2291f764$1$b40ac370c34e3c2d1b8f2145435932d671a5c31f",
+      "id": 11
+    },
+    {
+      "userType": "Company",
+      "email": "anura@gmail.com",
+      "password": "sha1$3616349c$1$2a231410c46e8a2324ba762353d53f527a48c3a0",
+      "id": 12
+    },
+    {
+      "userType": "Company",
+      "email": "anura@gmail.com",
+      "password": "sha1$d0608dee$1$4fe8c0109cf20149046905bd4d96868cb24b3810",
+      "id": 13
+    },
+    {
+      "userType": "Student",
+      "email": "wtgihan@gmail.com",
+      "password": "sha1$53937628$1$91daed93963fc4916874479b2ecc7a40cb731008",
+      "id": 14
+    },
+    {
+      "userType": "Company",
+      "email": "w.tharindu.gihan.lk@gmail.com",
+      "password": "sha1$bff5eca3$1$006ab7c03c61fab942b829a1fed28c97d24c77ca",
+      "id": 15
+    },
+    {
+      "userType": "Company",
+      "email": "w.tharindu.gihan.lk@gmail.com",
+      "password": "sha1$5aa15416$1$c127ab57968f7e17ad87cd35ac0eb9796bf97a3d",
+      "id": 16
+    },
+    {
+      "userType": "Company",
+      "email": "w.tharindu.gihan.lk@gmail.com",
+      "password": "sha1$cc90243d$1$aa12b875bc1d710f860082eced7bc412c390b793",
+      "id": 17
+    },
+    {
+      "userType": "Company",
+      "email": "w.tharindu.gihan.lk@gmail.com",
+      "password": "sha1$d4f10159$1$4fac962c0eae8c799aee489800437b08d2a54a81",
+      "id": 18
+    },
+    {
+      "userType": "Company",
+      "email": "w.tharindu.gihan.lk@gmail.com",
+      "password": "sha1$96724c39$1$0f1fd7fd25be35c00b46a33d8ac147619b647553",
+      "id": 19
+    },
+    {
+      "userType": "Student",
+      "email": "himasha@gmail.com",
+      "password": "sha1$e08c2e57$1$dff50056f939d8cc4f5dd470c4ad167e1358c63d",
+      "id": 20
+    },
+    {
+      "userType": "Student",
+      "email": "sathira@gmail.com",
+      "password": "sha1$376d92e3$1$5562350fb8aec8d6fcb8e57c31958cc9109a52f4",
+      "id": 21
     }
   ],
   "students": [
@@ -43,6 +133,42 @@
           "email": "wolfxcodedevelop@gmail.com"
         }
       ]
+    },
+    {
+      "id": 2,
+      "username": "Sathira",
+      "adminAcception": "",
+      "studentName": "Dimuthu Rathnasinghe",
+      "email": "sathira@gmail.com",
+      "contactnumber": "07778522731",
+      "university": "University of Colombo",
+      "languageSkill": "1. Java\n2. Python",
+      "softSkill": "1.Leadershipskill\n2.Community Skill",
+      "projects": "1.Intern Mangament Project"
+    },
+    {
+      "id": 3,
+      "username": "Himasha",
+      "adminAcception": "",
+      "studentName": "Himasha Anjali",
+      "email": "himasha@gmail.com",
+      "contactnumber": "07778522731",
+      "university": "University of Colombo",
+      "languageSkill": "1.Python\n2.Java",
+      "softSkill": "1.Leadership Skill",
+      "projects": "1.Project Management"
+    },
+    {
+      "id": 4,
+      "username": "Sathira",
+      "adminAcception": "",
+      "studentName": "Dimuthu Rathnasinghe",
+      "email": "sathira@gmail.com",
+      "contactnumber": "07778522731",
+      "university": "University of Colombo",
+      "languageSkill": "1. Java\n2.Python",
+      "softSkill": "1.Leadership Skill\n2.Communication Skill",
+      "projects": "1.Hotel Management Project"
     }
   ],
   "companies": [

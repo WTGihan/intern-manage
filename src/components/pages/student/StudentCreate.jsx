@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
 
-function StudentProfile({ loginUser }) {
+function StudentCreate() {
   const [student, setStudent] = useState({
     id: "",
     username: "",
-    adminAcception: "",
+    adminAcception: "NotAccepted",
     studentName: "",
     email: "",
     contactnumber: "",
@@ -16,44 +15,36 @@ function StudentProfile({ loginUser }) {
     projects: "",
   });
 
-  useEffect(() => {
-    loadStudents();
-  }, []);
+  const onInputChange = (e) => {
+    setStudent({ ...student, [e.target.name]: e.target.value });
+  };
 
-  const loadStudents = async () => {
-    const loginUseremail = loginUser.email;
-    const result = await axios.get("http://localhost:3004/students");
-    const students = result.data;
-    const newresult = students.filter((data) => data.email === loginUseremail);
-    newresult.forEach((data) => {
-      setStudent(data);
-    });
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    await axios.post("http://localhost:3004/students", student);
+    let result = JSON.parse(localStorage.getItem("loginUser"));
+    const loginUser = {
+      email: result.email,
+      userType: result.userType,
+    };
+    localStorage.setItem("loginUser", JSON.stringify(loginUser));
+    window.location = "/";
   };
 
   return (
     <div className="container  w-50 m-auto">
       <div className="py-4">
         <h1 className="text-center setmargin">Student Profile</h1>
-        <form className="mx-auto">
+        <form className="mx-auto" onSubmit={(e) => onSubmit(e)}>
           <div className="form-group row">
             <label className="col-sm-4 col-form-label">Username</label>
             <div className="col-sm-8">
               <input
                 type="text"
                 className="form-control"
+                name="username"
                 value={student.username}
-                readOnly
-              />
-            </div>
-          </div>
-          <div className="form-group row">
-            <label className="col-sm-4 col-form-label">Admin Acception</label>
-            <div className="col-sm-8">
-              <input
-                type="text"
-                className="form-control"
-                value={student.adminAcception}
-                readOnly
+                onChange={(e) => onInputChange(e)}
               />
             </div>
           </div>
@@ -63,8 +54,9 @@ function StudentProfile({ loginUser }) {
               <input
                 type="text"
                 className="form-control"
+                name="studentName"
                 value={student.studentName}
-                readOnly
+                onChange={(e) => onInputChange(e)}
               />
             </div>
           </div>
@@ -74,8 +66,9 @@ function StudentProfile({ loginUser }) {
               <input
                 type="text"
                 className="form-control"
+                name="email"
                 value={student.email}
-                readOnly
+                onChange={(e) => onInputChange(e)}
               />
             </div>
           </div>
@@ -85,8 +78,9 @@ function StudentProfile({ loginUser }) {
               <input
                 type="text"
                 className="form-control"
+                name="contactnumber"
                 value={student.contactnumber}
-                readOnly
+                onChange={(e) => onInputChange(e)}
               />
             </div>
           </div>
@@ -96,8 +90,9 @@ function StudentProfile({ loginUser }) {
               <input
                 type="text"
                 className="form-control"
+                name="university"
                 value={student.university}
-                readOnly
+                onChange={(e) => onInputChange(e)}
               />
             </div>
           </div>
@@ -106,8 +101,9 @@ function StudentProfile({ loginUser }) {
             <div className="col-sm-8">
               <textarea
                 className="form-control"
+                name="languageSkill"
                 value={student.languageSkill}
-                readOnly
+                onChange={(e) => onInputChange(e)}
               />
             </div>
           </div>
@@ -116,8 +112,9 @@ function StudentProfile({ loginUser }) {
             <div className="col-sm-8">
               <textarea
                 className="form-control"
+                name="softSkill"
                 value={student.softSkill}
-                readOnly
+                onChange={(e) => onInputChange(e)}
               />
             </div>
           </div>
@@ -126,24 +123,15 @@ function StudentProfile({ loginUser }) {
             <div className="col-sm-8">
               <textarea
                 className="form-control"
+                name="projects"
                 value={student.projects}
-                readOnly
+                onChange={(e) => onInputChange(e)}
               />
             </div>
           </div>
 
           <div className="btn-group mr-2">
-            <Link
-              className="btn btn-primary"
-              to={`/student-profile/edit/${student.id}`}
-            >
-              Edit
-            </Link>
-          </div>
-          <div className="btn-group mr-2">
-            <Link className="btn btn-danger" to="/">
-              Delete
-            </Link>
+            <button className="btn btn-primary">Create Student</button>
           </div>
         </form>
       </div>
@@ -151,4 +139,4 @@ function StudentProfile({ loginUser }) {
   );
 }
 
-export default StudentProfile;
+export default StudentCreate;

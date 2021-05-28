@@ -24,12 +24,18 @@ function SignUp() {
     result = { ...newuser };
     result["password"] = passwordHash.generate(result["password"]);
 
-    const loginUser = { email: result.email, userType: result.userType };
+    const loginUser = {
+      email: result.email,
+      userType: result.userType,
+      status: "new",
+    };
 
     localStorage.setItem("loginUser", JSON.stringify(loginUser));
 
     await axios.post("http://localhost:3004/users", result);
-    window.location = "/";
+    if (result.userType === "Student") {
+      window.location = "/student-create";
+    }
   };
 
   const { userType, email, password } = newuser;
