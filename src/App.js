@@ -19,6 +19,7 @@ import NotFound from "./components/pages/common/NotFound";
 import Home from "./components/pages/common/Home";
 import Logout from "./components/pages/common/Logout";
 import StudentCreate from "./components/pages/student/StudentCreate";
+import StudentEdit from "./components/pages/student/StudentEdit";
 
 function App() {
   const [loginUser, setLoginUser] = useState([]);
@@ -26,7 +27,6 @@ function App() {
   // RUN ONCE when the app start
   useEffect(() => {
     getLocal();
-    console.log("hello");
   }, []);
 
   const getLocal = () => {
@@ -45,16 +45,16 @@ function App() {
         <Switch>
           <Route exact path="/signin" component={SignIn} />
           <Route exact path="/signup" component={SignUp} />
-
-          <Route exact path="/logout" render={(props) => <Logout />} />
-          <Route exact path="/about" component={About}></Route>
-          <Route exact path="/student-create" component={StudentCreate}></Route>
-
+          <Route exact path="/logout" component={Logout} />
+          <Route exact path="/about" component={About} />
+          <Route exact path="/student-create" component={StudentCreate} />
           <Route
             exact
-            path="/company/view/:id"
-            component={CompanyProfile}
-          ></Route>
+            path="/student-profile/edit/:id"
+            component={StudentEdit}
+          />
+          <Route exact path="/company/view/:id" component={CompanyProfile} />
+
           <Route
             exact
             path="/"
@@ -65,12 +65,8 @@ function App() {
             path="/student-profile"
             render={(props) => <StudentProfile loginUser={loginUser} />}
           />
-          <Route
-            exact
-            path="/company-profile"
-            component={CompanyProfile}
-          ></Route>
-          <Route component={NotFound}></Route>
+          <Route exact path="/company-profile" component={CompanyProfile} />
+          <Route component={NotFound} />
         </Switch>
       </div>
     </Router>

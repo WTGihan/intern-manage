@@ -30,6 +30,21 @@ function StudentProfile({ loginUser }) {
     });
   };
 
+  const deleteStudent = async (id) => {
+    const loginUseremail = loginUser.email;
+    await axios.delete(`http://localhost:3004/students/${id}`);
+    const result = await axios.get("http://localhost:3004/users");
+    const users = result.data;
+    const newresult = users.filter((data) => data.email === loginUseremail);
+    let userid = "";
+    newresult.forEach((data) => {
+      userid = data.id;
+    });
+    await axios.delete(`http://localhost:3004/users/${userid}`);
+    localStorage.removeItem("loginUser");
+    window.location = "/";
+  };
+
   return (
     <div className="container  w-50 m-auto">
       <div className="py-4">
@@ -141,7 +156,11 @@ function StudentProfile({ loginUser }) {
             </Link>
           </div>
           <div className="btn-group mr-2">
-            <Link className="btn btn-danger" to="/">
+            <Link
+              className="btn btn-danger"
+              to="/"
+              onClick={() => deleteStudent(student.id)}
+            >
               Delete
             </Link>
           </div>
