@@ -83,7 +83,7 @@ function Navbar({ loginUser }) {
         {email !== "" && (
           <React.Fragment>
             <div className="btn-group mr-2">
-              <Link className="btn btn-outline-primary" to="/">
+              <Link className="btn btn-outline-primary" to="/logout">
                 Logout
               </Link>
             </div>

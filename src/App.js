@@ -1,7 +1,6 @@
 import "./App.css";
 import "../node_modules/bootstrap/dist/css/bootstrap.css";
 import { useState, useEffect } from "react";
-import Session from "react-session-api";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Navbar from "./components/layout/Navbar";
 import SignIn from "./components/pages/common/SignIn";
@@ -13,6 +12,7 @@ import NotFound from "./components/pages/common/NotFound";
 // import CompanyHome from "./components/pages/company/CompanyHome";
 // import StudentHome from "./components/pages/student/StudentHome";
 import Home from "./components/pages/common/Home";
+import Logout from "./components/pages/common/Logout";
 
 function App() {
   const [loginUser, setLoginUser] = useState([]);
@@ -52,6 +52,13 @@ function App() {
             path="/signin"
             render={(props) => (
               <SignIn setLoginUser={setLoginUser} loginUser={loginUser} />
+            )}
+          />
+          <Route
+            exact
+            path="/logout"
+            render={(props) => (
+              <Logout setLoginUser={setLoginUser} loginUser={loginUser} />
             )}
           />
           <Route exact path="/signup" component={SignUp}></Route>
