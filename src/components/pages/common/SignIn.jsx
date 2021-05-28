@@ -3,8 +3,10 @@ import axios from "axios";
 import { useHistory } from "react-router-dom";
 import passwordHash from "password-hash";
 
-function SignIn({ setLoginUser, loginUser }) {
+function SignIn({}) {
   let history = useHistory();
+
+  // const [loginUser, setLoginUser] = useState([]);
 
   const [user, setUser] = useState({
     email: "",
@@ -21,7 +23,7 @@ function SignIn({ setLoginUser, loginUser }) {
     const result = await axios.get("http://localhost:3004/users");
     const users = result.data;
     let validUser = false;
-    // const loginUser = {};
+    let loginUser = {};
 
     users.forEach((person) => {
       if (
@@ -29,23 +31,14 @@ function SignIn({ setLoginUser, loginUser }) {
         passwordHash.verify(user.password, person.password)
       ) {
         validUser = true;
-        setLoginUser([
-          ...loginUser,
-          { email: person.email, userType: person.userType },
-        ]);
+        loginUser = { email: person.email, userType: person.userType };
 
-        // loginUser.email = person.email;
-        // loginUser.userType = person.userType;
-        // // Create session storage
-        // Session.set("loginUser", loginUser);
-        // console.log(Session.get("loginUser"));
+        localStorage.setItem("loginUser", JSON.stringify(loginUser));
       }
     });
 
-    // console.log(loginUser);
-
     if (validUser === true) {
-      history.push("/");
+      window.location = "/";
     } else {
       setUser((user) => ({
         ...user,

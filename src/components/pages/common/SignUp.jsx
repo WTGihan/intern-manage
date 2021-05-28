@@ -3,7 +3,8 @@ import axios from "axios";
 import { useHistory } from "react-router-dom";
 import passwordHash from "password-hash";
 
-function SignUp({ setLoginUser, loginUser }) {
+function SignUp() {
+  // Email must be unique
   let history = useHistory();
   const [newuser, createUser] = useState({
     userType: "Select User Type",
@@ -19,16 +20,16 @@ function SignUp({ setLoginUser, loginUser }) {
     e.preventDefault();
 
     let result = [];
+
     result = { ...newuser };
     result["password"] = passwordHash.generate(result["password"]);
 
-    setLoginUser([
-      ...loginUser,
-      { email: result.email, userType: result.userType },
-    ]);
+    const loginUser = { email: result.email, userType: result.userType };
+
+    localStorage.setItem("loginUser", JSON.stringify(loginUser));
 
     await axios.post("http://localhost:3004/users", result);
-    history.replace("/");
+    window.location = "/";
   };
 
   const { userType, email, password } = newuser;

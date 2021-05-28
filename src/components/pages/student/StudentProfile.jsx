@@ -1,7 +1,35 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { Link } from "react-router-dom";
 
-function StudentProfile() {
+function StudentProfile({ loginUser }) {
+  const [student, setStudent] = useState({
+    id: "",
+    username: "",
+    adminAcception: "",
+    studentName: "",
+    email: "",
+    contactnumber: "",
+    university: "",
+    languageSkill: "",
+    softSkill: "",
+    projects: "",
+  });
+
+  useEffect(() => {
+    loadStudents();
+  }, []);
+
+  const loadStudents = async () => {
+    const loginUseremail = loginUser.email;
+    const result = await axios.get("http://localhost:3004/students");
+    const students = result.data;
+    const newresult = students.filter((data) => data.email === loginUseremail);
+    newresult.forEach((data) => {
+      setStudent(data);
+    });
+  };
+
   return (
     <div className="container  w-50 m-auto">
       <div className="py-4">
@@ -13,11 +41,8 @@ function StudentProfile() {
               <input
                 type="text"
                 className="form-control"
-                // placeholder="Enter Username"
-                name="name"
-                value="WTGihan"
+                value={student.username}
                 readOnly
-                // onChange={(e) => onInputChange(e)}
               />
             </div>
           </div>
@@ -27,11 +52,8 @@ function StudentProfile() {
               <input
                 type="text"
                 className="form-control"
-                // placeholder="Enter Username"
-                name="name"
-                value="NotAccepted"
+                value={student.adminAcception}
                 readOnly
-                // onChange={(e) => onInputChange(e)}
               />
             </div>
           </div>
@@ -41,11 +63,8 @@ function StudentProfile() {
               <input
                 type="text"
                 className="form-control"
-                placeholder="Enter Username"
-                name="name"
-                value="Tharindu Gihan"
+                value={student.studentName}
                 readOnly
-                // onChange={(e) => onInputChange(e)}
               />
             </div>
           </div>
@@ -55,12 +74,8 @@ function StudentProfile() {
               <input
                 type="text"
                 className="form-control"
-                placeholder="Enter Username"
-                name="name"
-                value="wtgihan@gmail.com"
+                value={student.email}
                 readOnly
-                // value={name}
-                // onChange={(e) => onInputChange(e)}
               />
             </div>
           </div>
@@ -70,12 +85,8 @@ function StudentProfile() {
               <input
                 type="text"
                 className="form-control"
-                placeholder="Enter Password"
-                name="username"
-                value="0778522736"
+                value={student.contactnumber}
                 readOnly
-                // value={username}
-                // onChange={(e) => onInputChange(e)}
               />
             </div>
           </div>
@@ -85,12 +96,8 @@ function StudentProfile() {
               <input
                 type="text"
                 className="form-control"
-                placeholder="Enter Password"
-                name="username"
-                value="University of Colombo School of Computing"
+                value={student.university}
                 readOnly
-                // value={username}
-                // onChange={(e) => onInputChange(e)}
               />
             </div>
           </div>
@@ -99,11 +106,8 @@ function StudentProfile() {
             <div className="col-sm-8">
               <textarea
                 className="form-control"
-                placeholder="Required example textarea"
-                name="username"
-                value="Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, ab."
+                value={student.languageSkill}
                 readOnly
-                // required
               />
             </div>
           </div>
@@ -112,11 +116,8 @@ function StudentProfile() {
             <div className="col-sm-8">
               <textarea
                 className="form-control"
-                placeholder="Required example textarea"
-                name="username"
-                value="Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, ab."
+                value={student.softSkill}
                 readOnly
-                // required
               />
             </div>
           </div>
@@ -125,20 +126,12 @@ function StudentProfile() {
             <div className="col-sm-8">
               <textarea
                 className="form-control"
-                placeholder="Required example textarea"
-                name="username"
-                value="Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, ab."
+                value={student.projects}
                 readOnly
-                // required
               />
             </div>
           </div>
 
-          <div className="btn-group mr-2">
-            <Link className="btn btn-secondary" to="/student-profile">
-              Apply
-            </Link>
-          </div>
           <div className="btn-group mr-2">
             <Link className="btn btn-primary" to="/student-profile/edit">
               Edit

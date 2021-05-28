@@ -2,15 +2,8 @@ import React from "react";
 import { Link, NavLink } from "react-router-dom";
 
 function Navbar({ loginUser }) {
-  let userType = "";
-  let email = "";
-
-  loginUser.map((result) => {
-    email = result.email;
-    userType = result.userType;
-
-    return { email, userType };
-  });
+  const email = loginUser.email;
+  const userType = loginUser.userType;
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -61,7 +54,7 @@ function Navbar({ loginUser }) {
                 </li>
               </React.Fragment>
             )}
-            {userType === "" && (
+            {(userType === "" || typeof userType === undefined) && (
               <React.Fragment>
                 <li className="nav-item">
                   <NavLink className="nav-link" exact to="/companies">
@@ -83,7 +76,7 @@ function Navbar({ loginUser }) {
             </li>
           </ul>
         </div>
-        {email !== "" && (
+        {email !== "" && email !== undefined && (
           <React.Fragment>
             <div className="btn-group mr-2">
               <Link className="btn btn-outline-primary" to="/logout">
@@ -92,7 +85,7 @@ function Navbar({ loginUser }) {
             </div>
           </React.Fragment>
         )}
-        {email === "" && (
+        {(email === "" || email === undefined) && (
           <React.Fragment>
             <div className="btn-group mr-2">
               <Link className="btn btn-outline-primary" to="/signin">

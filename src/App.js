@@ -1,7 +1,12 @@
 import "./App.css";
 import "../node_modules/bootstrap/dist/css/bootstrap.css";
 import { useState, useEffect } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import {
+  BrowserRouter,
+  BrowserRouter as Router,
+  Route,
+  Switch,
+} from "react-router-dom";
 import Navbar from "./components/layout/Navbar";
 import SignIn from "./components/pages/common/SignIn";
 import SignUp from "./components/pages/common/SignUp";
@@ -20,24 +25,15 @@ function App() {
   // RUN ONCE when the app start
   useEffect(() => {
     getLocal();
+    console.log("hello");
   }, []);
-
-  // UseEffect
-  useEffect(() => {
-    saveLocal();
-  }, [loginUser]);
-
-  // Save to local storage
-  const saveLocal = () => {
-    localStorage.setItem("loginUser", JSON.stringify(loginUser));
-  };
 
   const getLocal = () => {
     if (localStorage.getItem("loginUser") === null) {
       localStorage.setItem("loginUser", JSON.stringify([]));
     } else {
-      let loginUser = JSON.parse(localStorage.getItem("loginUser"));
-      setLoginUser(loginUser);
+      let result = JSON.parse(localStorage.getItem("loginUser"));
+      setLoginUser(result);
     }
   };
 
@@ -46,14 +42,7 @@ function App() {
       <div className="App">
         <Navbar loginUser={loginUser} />
         <Switch>
-          {/* <Route exact path="/signin" component={SignIn}></Route> */}
-          <Route
-            exact
-            path="/signin"
-            render={(props) => (
-              <SignIn setLoginUser={setLoginUser} loginUser={loginUser} />
-            )}
-          />
+          <Route exact path="/signin" component={SignIn} />
           <Route
             exact
             path="/signup"
@@ -61,13 +50,7 @@ function App() {
               <SignUp setLoginUser={setLoginUser} loginUser={loginUser} />
             )}
           />
-          <Route
-            exact
-            path="/logout"
-            render={(props) => (
-              <Logout setLoginUser={setLoginUser} loginUser={loginUser} />
-            )}
-          />
+          <Route exact path="/logout" render={(props) => <Logout />} />
           <Route exact path="/about" component={About}></Route>
           {/* <Route exact path="/companies" component={CompanyHome}></Route> */}
           <Route
@@ -75,12 +58,16 @@ function App() {
             path="/company/view/:id"
             component={CompanyProfile}
           ></Route>
-          <Route exact path="/" component={Home}></Route>
+          <Route
+            exact
+            path="/"
+            render={(props) => <Home loginUser={loginUser} />}
+          />
           <Route
             exact
             path="/student-profile"
-            component={StudentProfile}
-          ></Route>
+            render={(props) => <StudentProfile loginUser={loginUser} />}
+          />
           <Route
             exact
             path="/company-profile"

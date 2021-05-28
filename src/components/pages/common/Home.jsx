@@ -1,11 +1,21 @@
 import React from "react";
+import CompanyHome from "../company/CompanyHome";
+import StudentHome from "../student/StudentHome";
 
-function Home() {
-  //   console.log(Session.get("loginUser"));
+function Home({ loginUser }) {
+  const userType = loginUser.userType;
   return (
     <div>
-      <h1 className="text-center">Home Page</h1>
-      {/* render student home or company home according to login user */}
+      {userType === "Student" && (
+        <React.Fragment>
+          <StudentHome />
+        </React.Fragment>
+      )}
+      {userType === "Company" && (
+        <React.Fragment>
+          <CompanyHome />
+        </React.Fragment>
+      )}
     </div>
   );
 }

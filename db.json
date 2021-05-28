@@ -1,20 +1,8 @@
 {
   "users": [
     {
-      "id": 1,
       "userType": "Student",
       "email": "wtgihan@gmail.com",
-      "password": "1111"
-    },
-    {
-      "userType": "Student",
-      "email": "wtgihan@gmail.com",
-      "password": "sha1$d22b4f94$1$ea82c90a110420d49d4fdecbb4788a2261ffba26",
-      "id": 2
-    },
-    {
-      "userType": "Student",
-      "email": "w.tharindu.gihan.lk@gmail.com",
       "password": "sha1$c8310fd8$1$72e9c72033192fd3fb23c1e60a6e86d8317753a9",
       "id": 3
     },
@@ -29,6 +17,12 @@
       "email": "anura@gmail.com",
       "password": "sha1$5a4baef7$1$4ae028855ee967ed98804cbcbee21f9ad08b5b76",
       "id": 5
+    },
+    {
+      "userType": "Student",
+      "email": "w.tharindu.gihan.lk@gmail.com",
+      "password": "sha1$ef03cdbf$1$969271987126a43eab352ebbaa8d88d3147020cb",
+      "id": 6
     }
   ],
   "students": [
@@ -59,10 +53,16 @@
       "companyAdminName": "Tharindu Gihan",
       "email": "wolfxcodedevelop@gmail.com",
       "contactnumber": "0778522736",
-      "company": "University of Colombo School of Computing",
+      "company": "WolfXCode Lab",
       "technologies": " 1. Reactjs \n 2. Node.js \n 3. Java",
       "qualificationAndExperience": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, ab.",
-      "aboutCompany": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, ab."
+      "aboutCompany": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, ab.",
+      "applystudents": [
+        {
+          "id": 1,
+          "email": "wtgihan@gmail.com"
+        }
+      ]
     }
   ]
 }

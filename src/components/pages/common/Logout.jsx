@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
 
-function Logout({ setLoginUser, loginUser }) {
+function Logout() {
   useEffect(() => {
-    setLoginUser([...loginUser, { email: "", userType: "" }]);
+    localStorage.removeItem("loginUser");
+    window.location = "/";
   }, []);
 
   return null;
