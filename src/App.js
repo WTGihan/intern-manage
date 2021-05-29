@@ -22,6 +22,7 @@ import StudentCreate from "./components/pages/student/StudentCreate";
 import StudentEdit from "./components/pages/student/StudentEdit";
 import CompanyCreate from "./components/pages/company/CompanyCreate";
 import CompanyEdit from "./components/pages/company/CompanyEdit";
+import AdminProfile from "./components/pages/campus-admin/AdminProfile";
 
 function App() {
   const [loginUser, setLoginUser] = useState([]);
@@ -45,10 +46,7 @@ function App() {
       <div className="App">
         <Navbar loginUser={loginUser} />
         <Switch>
-          <Route exact path="/signin" component={SignIn} />
-          <Route exact path="/signup" component={SignUp} />
-          <Route exact path="/logout" component={Logout} />
-          <Route exact path="/about" component={About} />
+          {/* Student */}
           <Route
             exact
             path="/student-profile"
@@ -60,9 +58,8 @@ function App() {
             path="/student-profile/edit/:id"
             component={StudentEdit}
           />
-          {/* <Route exact path="/company/view/:id" component={CompanyProfile} /> */}
 
-          {/* <Route exact path="/company-profile" component={CompanyProfile} /> */}
+          {/* Company */}
           <Route exact path="/company-create" component={CompanyCreate} />
           <Route
             exact
@@ -80,6 +77,17 @@ function App() {
             component={CompanyEdit}
           />
 
+          {/* Campus Admin */}
+          <Route
+            exact
+            path="/admin-profile"
+            render={(props) => <AdminProfile loginUser={loginUser} />}
+          />
+
+          <Route exact path="/signin" component={SignIn} />
+          <Route exact path="/signup" component={SignUp} />
+          <Route exact path="/logout" component={Logout} />
+          <Route exact path="/about" component={About} />
           <Route
             exact
             path="/"

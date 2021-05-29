@@ -39,6 +39,7 @@ function SignUp() {
     if (result.userType === "Company") {
       window.location = "/company-create";
     }
+    // Campus Admin role pre-created account this no create new account
   };
 
   const { userType, email, password } = newuser;
@@ -60,7 +61,6 @@ function SignUp() {
                 <option value={userType}>{userType}</option>
                 <option value="Student">Student</option>
                 <option value="Company">Company</option>
-                <option value="CampusAdmin">Campus Admin</option>
               </select>
             </div>
           </div>

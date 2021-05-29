@@ -17,6 +17,22 @@
       "email": "anura@gmail.com",
       "password": "sha1$7365c6a2$1$03029d848f5a57913d5d8ba9675d0c97b2fe6fe2",
       "id": 4
+    },
+    {
+      "userType": "CampusAdmin",
+      "email": "ucsc@gmail.com",
+      "password": "sha1$664e55f2$1$ab586f81d508cb34c343c384932f765fa0119a9b",
+      "id": 5
+    }
+  ],
+  "campusAdmin": [
+    {
+      "id": 1,
+      "username": "UCSCAdmin",
+      "adminName": "Tharindu Wijethilake",
+      "email": "ucsc@gmail.com",
+      "contactnumber": "0913908069",
+      "university": "University of Colombo School of Computing"
     }
   ],
   "students": [
