@@ -19,13 +19,12 @@ function CompanyEdit() {
   });
 
   useEffect(() => {
+    const loadCompany = async () => {
+      const result = await axios.get(`http://localhost:3004/companies/${id}`);
+      setCompany(result.data);
+    };
     loadCompany();
-  });
-
-  const loadCompany = async () => {
-    const result = await axios.get(`http://localhost:3004/companies/${id}`);
-    setCompany(result.data);
-  };
+  }, []);
 
   const onInputChange = (e) => {
     setCompany({ ...company, [e.target.name]: e.target.value });

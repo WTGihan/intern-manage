@@ -16,6 +16,7 @@ import StudentEdit from "./components/pages/student/StudentEdit";
 import CompanyCreate from "./components/pages/company/CompanyCreate";
 import CompanyEdit from "./components/pages/company/CompanyEdit";
 import AdminProfile from "./components/pages/campus-admin/AdminProfile";
+import AdminEdit from "./components/pages/campus-admin/AdminEdit";
 
 function App() {
   const [loginUser, setLoginUser] = useState([]);
@@ -76,6 +77,7 @@ function App() {
             path="/admin-profile"
             render={(props) => <AdminProfile loginUser={loginUser} />}
           />
+          <Route exact path="/admin-profile/edit/:id" component={AdminEdit} />
 
           <Route exact path="/signin" component={SignIn} />
           <Route exact path="/signup" component={SignUp} />

@@ -2,12 +2,15 @@ import React, { useState } from "react";
 import axios from "axios";
 
 function StudentCreate() {
+  let result = JSON.parse(localStorage.getItem("loginUser"));
+  const email = result.email;
+
   const [student, setStudent] = useState({
     id: "",
     username: "",
     adminAcception: "NotAccepted",
     studentName: "",
-    email: "",
+    email: email,
     contactnumber: "",
     university: "",
     languageSkill: "",
@@ -56,18 +59,6 @@ function StudentCreate() {
                 className="form-control"
                 name="studentName"
                 value={student.studentName}
-                onChange={(e) => onInputChange(e)}
-              />
-            </div>
-          </div>
-          <div className="form-group row">
-            <label className="col-sm-4 col-form-label">Email</label>
-            <div className="col-sm-8">
-              <input
-                type="text"
-                className="form-control"
-                name="email"
-                value={student.email}
                 onChange={(e) => onInputChange(e)}
               />
             </div>

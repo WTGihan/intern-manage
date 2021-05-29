@@ -4,6 +4,8 @@ import { useHistory, useParams } from "react-router-dom";
 
 function StudentEdit() {
   let history = useHistory();
+  let result = JSON.parse(localStorage.getItem("loginUser"));
+  const email = result.email;
 
   const { id } = useParams();
 
@@ -11,7 +13,7 @@ function StudentEdit() {
     id: "",
     username: "",
     studentName: "",
-    email: "",
+    email: email,
     contactnumber: "",
     university: "",
     languageSkill: "",
@@ -66,18 +68,7 @@ function StudentEdit() {
               />
             </div>
           </div>
-          <div className="form-group row">
-            <label className="col-sm-4 col-form-label">Email</label>
-            <div className="col-sm-8">
-              <input
-                type="text"
-                className="form-control"
-                name="email"
-                value={student.email}
-                onChange={(e) => onInputChange(e)}
-              />
-            </div>
-          </div>
+
           <div className="form-group row">
             <label className="col-sm-4 col-form-label">Contact Number</label>
             <div className="col-sm-8">
