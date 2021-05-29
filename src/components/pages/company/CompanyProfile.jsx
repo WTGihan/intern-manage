@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 
 function CompanyProfile({ loginUser }) {
+  const userType = loginUser.userType;
   const [company, setCompany] = useState({
     username: "",
     adminAcception: "",
@@ -52,6 +53,22 @@ function CompanyProfile({ loginUser }) {
     await axios.delete(`http://localhost:3004/users/${userid}`);
     localStorage.removeItem("loginUser");
     window.location = "/";
+  };
+
+  const acceptCompany = async (id) => {
+    const result = await axios.get(`http://localhost:3004/companies/${id}`);
+    let newCompany = result.data;
+    newCompany.adminAcception = "Accepted";
+    await axios.put(`http://localhost:3004/companies/${id}`, newCompany);
+    window.location = "/request-companies";
+  };
+
+  const declineCompany = async (id) => {
+    const result = await axios.get(`http://localhost:3004/companies/${id}`);
+    let newCompany = result.data;
+    newCompany.adminAcception = "AdminDeclined";
+    await axios.put(`http://localhost:3004/companies/${id}`, newCompany);
+    window.location = "/request-companies";
   };
 
   return (
@@ -164,11 +181,33 @@ function CompanyProfile({ loginUser }) {
             </div>
           </div>
 
-          {id && (
+          {id && userType === "Student" && (
             <React.Fragment>
               <div className="btn-group mr-2">
                 <Link className="btn btn-secondary" to="/company-profile">
                   Apply For Company
+                </Link>
+              </div>
+            </React.Fragment>
+          )}
+          {id && userType === "CampusAdmin" && (
+            <React.Fragment>
+              <div className="btn-group mr-2">
+                <Link
+                  className="btn btn-primary"
+                  onClick={() => acceptCompany(id)}
+                  to="/request-companies"
+                >
+                  Accept
+                </Link>
+              </div>
+              <div className="btn-group mr-2">
+                <Link
+                  className="btn btn-danger"
+                  onClick={() => declineCompany(id)}
+                  to="/request-companies"
+                >
+                  Decline
                 </Link>
               </div>
             </React.Fragment>
