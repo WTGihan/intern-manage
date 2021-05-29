@@ -14,7 +14,7 @@ function AdminProfile({ loginUser }) {
 
   useEffect(() => {
     loadAdmin();
-  }, []);
+  }, [loginUser]);
 
   const loadAdmin = async () => {
     const loginUseremail = loginUser.email;

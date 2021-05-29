@@ -1,6 +1,6 @@
 import "./App.css";
 import "../node_modules/bootstrap/dist/css/bootstrap.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   BrowserRouter,
   BrowserRouter as Router,
@@ -26,11 +26,18 @@ import AdminProfile from "./components/pages/campus-admin/AdminProfile";
 
 function App() {
   const [loginUser, setLoginUser] = useState([]);
+  // const mountedRef = useRef(true);
 
   // RUN ONCE when the app start
   useEffect(() => {
     getLocal();
   }, []);
+
+  // useEffect(() => {
+  //   return () => {
+  //     mountedRef.current = false;
+  //   };
+  // }, []);
 
   const getLocal = () => {
     if (localStorage.getItem("loginUser") === null) {

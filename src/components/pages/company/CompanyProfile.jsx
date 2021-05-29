@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 
@@ -19,7 +19,7 @@ function CompanyProfile({ loginUser }) {
 
   useEffect(() => {
     loadCompany();
-  }, []);
+  }, [loginUser]);
 
   const loadCompany = async () => {
     if (id === undefined) {

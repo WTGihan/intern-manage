@@ -18,7 +18,11 @@ function StudentProfile({ loginUser }) {
 
   useEffect(() => {
     loadStudents();
-  }, []);
+  }, [loginUser]);
+
+  // window.onbeforeunload = function (e) {
+  //   return onUnload();
+  // };
 
   const loadStudents = async () => {
     const loginUseremail = loginUser.email;
