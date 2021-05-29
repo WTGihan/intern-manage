@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 
 function CompanyCreate() {
@@ -22,10 +22,6 @@ function CompanyCreate() {
   const onInputChange = (e) => {
     setCompany({ ...company, [e.target.name]: e.target.value });
   };
-
-  //   useEffect(() => {
-  //     getuserId();
-  //   }, []);
 
   const onSubmit = async (e) => {
     e.preventDefault();

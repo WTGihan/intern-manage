@@ -17,22 +17,23 @@ function StudentProfile({ loginUser }) {
   });
 
   useEffect(() => {
+    const loadStudents = async () => {
+      const loginUseremail = loginUser.email;
+      const result = await axios.get("http://localhost:3004/students");
+      const students = result.data;
+      const newresult = students.filter(
+        (data) => data.email === loginUseremail
+      );
+      newresult.forEach((data) => {
+        setStudent(data);
+      });
+    };
     loadStudents();
   }, [loginUser]);
 
   // window.onbeforeunload = function (e) {
   //   return onUnload();
   // };
-
-  const loadStudents = async () => {
-    const loginUseremail = loginUser.email;
-    const result = await axios.get("http://localhost:3004/students");
-    const students = result.data;
-    const newresult = students.filter((data) => data.email === loginUseremail);
-    newresult.forEach((data) => {
-      setStudent(data);
-    });
-  };
 
   const deleteStudent = async (id) => {
     const loginUseremail = loginUser.email;

@@ -20,7 +20,7 @@ function CompanyEdit() {
 
   useEffect(() => {
     loadCompany();
-  }, []);
+  });
 
   const loadCompany = async () => {
     const result = await axios.get(`http://localhost:3004/companies/${id}`);

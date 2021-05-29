@@ -1,12 +1,7 @@
 import "./App.css";
 import "../node_modules/bootstrap/dist/css/bootstrap.css";
-import { useState, useEffect, useRef } from "react";
-import {
-  BrowserRouter,
-  BrowserRouter as Router,
-  Route,
-  Switch,
-} from "react-router-dom";
+import { useState, useEffect } from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Navbar from "./components/layout/Navbar";
 import SignIn from "./components/pages/common/SignIn";
 import SignUp from "./components/pages/common/SignUp";
@@ -14,8 +9,6 @@ import StudentProfile from "./components/pages/student/StudentProfile";
 import CompanyProfile from "./components/pages/company/CompanyProfile";
 import About from "./components/pages/common/About";
 import NotFound from "./components/pages/common/NotFound";
-// import CompanyHome from "./components/pages/company/CompanyHome";
-// import StudentHome from "./components/pages/student/StudentHome";
 import Home from "./components/pages/common/Home";
 import Logout from "./components/pages/common/Logout";
 import StudentCreate from "./components/pages/student/StudentCreate";
@@ -26,18 +19,11 @@ import AdminProfile from "./components/pages/campus-admin/AdminProfile";
 
 function App() {
   const [loginUser, setLoginUser] = useState([]);
-  // const mountedRef = useRef(true);
 
   // RUN ONCE when the app start
   useEffect(() => {
     getLocal();
   }, []);
-
-  // useEffect(() => {
-  //   return () => {
-  //     mountedRef.current = false;
-  //   };
-  // }, []);
 
   const getLocal = () => {
     if (localStorage.getItem("loginUser") === null) {

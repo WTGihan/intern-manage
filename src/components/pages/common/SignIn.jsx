@@ -1,13 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
 import passwordHash from "password-hash";
 
-function SignIn({}) {
-  let history = useHistory();
-
-  // const [loginUser, setLoginUser] = useState([]);
-
+function SignIn() {
   const [user, setUser] = useState({
     email: "",
     password: "",

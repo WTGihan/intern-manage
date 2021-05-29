@@ -13,18 +13,17 @@ function AdminProfile({ loginUser }) {
   });
 
   useEffect(() => {
+    const loadAdmin = async () => {
+      const loginUseremail = loginUser.email;
+      const result = await axios.get("http://localhost:3004/campusAdmin");
+      const admin = result.data;
+      const newresult = admin.filter((data) => data.email === loginUseremail);
+      newresult.forEach((data) => {
+        setAdmin(data);
+      });
+    };
     loadAdmin();
   }, [loginUser]);
-
-  const loadAdmin = async () => {
-    const loginUseremail = loginUser.email;
-    const result = await axios.get("http://localhost:3004/campusAdmin");
-    const admin = result.data;
-    const newresult = admin.filter((data) => data.email === loginUseremail);
-    newresult.forEach((data) => {
-      setAdmin(data);
-    });
-  };
 
   return (
     <div className="container  w-50 m-auto">

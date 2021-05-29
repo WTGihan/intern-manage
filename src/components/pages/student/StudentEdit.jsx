@@ -4,6 +4,7 @@ import { useHistory, useParams } from "react-router-dom";
 
 function StudentEdit() {
   let history = useHistory();
+
   const { id } = useParams();
 
   const [student, setStudent] = useState({
@@ -19,6 +20,10 @@ function StudentEdit() {
   });
 
   useEffect(() => {
+    const loadStudent = async () => {
+      const result = await axios.get(`http://localhost:3004/students/${id}`);
+      setStudent(result.data);
+    };
     loadStudent();
   }, []);
 
@@ -30,11 +35,6 @@ function StudentEdit() {
     e.preventDefault();
     await axios.put(`http://localhost:3004/students/${id}`, student);
     history.push("/student-profile");
-  };
-
-  const loadStudent = async () => {
-    const result = await axios.get(`http://localhost:3004/students/${id}`);
-    setStudent(result.data);
   };
 
   return (

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 
@@ -16,27 +16,25 @@ function CompanyProfile({ loginUser }) {
   });
 
   const { id } = useParams();
-
   useEffect(() => {
+    const loadCompany = async () => {
+      if (id === undefined) {
+        const loginUseremail = loginUser.email;
+        const result = await axios.get("http://localhost:3004/companies");
+        const students = result.data;
+        const newresult = students.filter(
+          (data) => data.useremail === loginUseremail
+        );
+        newresult.forEach((data) => {
+          setCompany(data);
+        });
+      } else {
+        const result = await axios.get(`http://localhost:3004/companies/${id}`);
+        setCompany(result.data);
+      }
+    };
     loadCompany();
   }, [loginUser]);
-
-  const loadCompany = async () => {
-    if (id === undefined) {
-      const loginUseremail = loginUser.email;
-      const result = await axios.get("http://localhost:3004/companies");
-      const students = result.data;
-      const newresult = students.filter(
-        (data) => data.useremail === loginUseremail
-      );
-      newresult.forEach((data) => {
-        setCompany(data);
-      });
-    } else {
-      const result = await axios.get(`http://localhost:3004/companies/${id}`);
-      setCompany(result.data);
-    }
-  };
 
   const deleteCompany = async (id) => {
     const loginUseremail = loginUser.email;

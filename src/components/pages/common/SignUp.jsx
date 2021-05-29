@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
 import passwordHash from "password-hash";
 
 function SignUp() {
   // Email must be unique
-  let history = useHistory();
+
   const [newuser, createUser] = useState({
     userType: "Select User Type",
     email: "",
