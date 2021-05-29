@@ -61,9 +61,9 @@
       "email": "wolfxcodedevelop@gmail.com",
       "contactnumber": "0778522736",
       "company": "WolfXCode Lab",
-      "technologies": " 1. Reactjs \n 2. Node.js \n 3. Java",
-      "qualificationAndExperience": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, ab.",
-      "aboutCompany": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, ab.",
+      "technologies": " 1. React.js\n 2. Node.js \n 3. Java\n 4. Mongo DB",
+      "qualificationAndExperience": "1. Computer Science Degree\n2. Problem Solving Skill",
+      "aboutCompany": "Most highest Valuable company in Sri Lanka",
       "applystudents": [
         {
           "id": 1,

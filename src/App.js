@@ -21,6 +21,7 @@ import Logout from "./components/pages/common/Logout";
 import StudentCreate from "./components/pages/student/StudentCreate";
 import StudentEdit from "./components/pages/student/StudentEdit";
 import CompanyCreate from "./components/pages/company/CompanyCreate";
+import CompanyEdit from "./components/pages/company/CompanyEdit";
 
 function App() {
   const [loginUser, setLoginUser] = useState([]);
@@ -72,6 +73,11 @@ function App() {
             exact
             path="/company/view/:id"
             render={(props) => <CompanyProfile loginUser={loginUser} />}
+          />
+          <Route
+            exact
+            path="/company-profile/edit/:id"
+            component={CompanyEdit}
           />
 
           <Route
