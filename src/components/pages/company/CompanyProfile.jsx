@@ -4,6 +4,8 @@ import { Link, useParams } from "react-router-dom";
 
 function CompanyProfile({ loginUser }) {
   const userType = loginUser.userType;
+  const url = window.location.pathname.split("/");
+  const viewType = url[2];
   const [company, setCompany] = useState({
     username: "",
     adminAcception: "",
@@ -190,7 +192,7 @@ function CompanyProfile({ loginUser }) {
               </div>
             </React.Fragment>
           )}
-          {id && userType === "CampusAdmin" && (
+          {id && userType === "CampusAdmin" && viewType === "view" && (
             <React.Fragment>
               <div className="btn-group mr-2">
                 <Link
@@ -208,6 +210,15 @@ function CompanyProfile({ loginUser }) {
                   to="/request-companies"
                 >
                   Decline
+                </Link>
+              </div>
+            </React.Fragment>
+          )}
+          {id && userType === "CampusAdmin" && viewType === "viewonly" && (
+            <React.Fragment>
+              <div className="btn-group mr-2">
+                <Link className="btn btn-primary" to="/companies">
+                  Back
                 </Link>
               </div>
             </React.Fragment>

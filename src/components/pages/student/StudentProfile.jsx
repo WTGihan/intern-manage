@@ -203,6 +203,15 @@ function StudentProfile({ loginUser }) {
               </div>
             </React.Fragment>
           )}
+          {id && userType === "CampusAdmin" && viewType === "viewonly" && (
+            <React.Fragment>
+              <div className="btn-group mr-2">
+                <Link className="btn btn-primary" to="/students">
+                  Back
+                </Link>
+              </div>
+            </React.Fragment>
+          )}
 
           {!id && (
             <React.Fragment>

@@ -91,6 +91,11 @@ function App() {
             path="/student/viewonly/:id"
             render={(props) => <StudentProfile loginUser={loginUser} />}
           />
+          <Route
+            exact
+            path="/company/viewonly/:id"
+            render={(props) => <CompanyProfile loginUser={loginUser} />}
+          />
           <Route exact path="/admin-profile/edit/:id" component={AdminEdit} />
           <Route exact path="/request-companies" component={RequestCompanies} />
           <Route exact path="/request-students" component={RequestStudents} />

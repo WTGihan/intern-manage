@@ -26,7 +26,7 @@ function Students() {
   return (
     <div className="container">
       <div className="py-4">
-        <h1 className="text-center setmargin">Request Companies</h1>
+        <h1 className="text-center setmargin">All Students</h1>
         <table className="table table-striped">
           <thead className="thead-dark">
             <tr>
