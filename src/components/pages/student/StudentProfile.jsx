@@ -60,6 +60,26 @@ function StudentProfile({ loginUser }) {
       userid = data.id;
     });
     await axios.delete(`http://localhost:3004/users/${userid}`);
+
+    // check student has company applications
+    const applications = await axios.get("http://localhost:3004/application");
+    const applicationResult = applications.data;
+    let newid = parseInt(id);
+    let applicationArray = [];
+    let i = 0;
+    applicationResult.forEach((data) => {
+      if (data.studentId === newid) {
+        applicationArray[i] = data.id;
+        i++;
+      }
+    });
+
+    for (let j = 0; j < applicationArray.length; j++) {
+      await axios.delete(
+        `http://localhost:3004/application/${applicationArray[i]}`
+      );
+    }
+
     localStorage.removeItem("loginUser");
     window.location = "/";
   };

@@ -23,15 +23,7 @@ function CompanyProfile({ loginUser }) {
 
   const [student, setStudent] = useState({
     id: "",
-    // username: "",
     adminAcception: "",
-    // studentName: "",
-    // email: "",
-    // contactnumber: "",
-    // university: "",
-    // languageSkill: "",
-    // softSkill: "",
-    // projects: "",
   });
 
   const [application, setApplication] = useState({
@@ -39,10 +31,6 @@ function CompanyProfile({ loginUser }) {
     companyId: "",
     studentId: "",
   });
-
-  // const [alreadyapplication, setAlreadyApplication] = useState({
-  //   status: false,
-  // });
 
   const { id } = useParams();
   useEffect(() => {
