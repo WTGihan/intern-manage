@@ -48,17 +48,11 @@
       "adminAcception": "Accepted",
       "studentName": "Tharindu Gihan",
       "email": "wtgihan@gmail.com",
-      "contactnumber": "0778522736",
+      "contactnumber": "0778522734",
       "university": "University of Colombo School of Computing",
       "languageSkill": "1.C Language\n2.Java Language\n3.Javascipt Language",
       "softSkill": "1.Solving Problem Skill",
-      "projects": "1.Internship Management Project",
-      "applycompanies": [
-        {
-          "id": 1,
-          "email": "wolfxcodedevelop@gmail.com"
-        }
-      ]
+      "projects": "1.Internship Management Project"
     },
     {
       "id": 2,
@@ -71,18 +65,6 @@
       "languageSkill": "1.Java\n2.JS\n3.C\n4.C++",
       "softSkill": "1.Fluent English\n2.Learning Skill",
       "projects": "1.Government Process"
-    },
-    {
-      "id": 3,
-      "username": "ssssssssssssssss",
-      "adminAcception": "Accepted",
-      "studentName": "ssssssssssssssssssssss",
-      "email": "wtgihan@gmail.com",
-      "contactnumber": "sssssssssssssssssssss",
-      "university": "ssssssssssssssssss",
-      "languageSkill": "ssssssssssssssssssssssss",
-      "softSkill": "sssssssssssssssssss",
-      "projects": "sssssssssssssssssssssssssss"
     }
   ],
   "companies": [
@@ -97,13 +79,7 @@
       "company": "WolfXCode Lab",
       "technologies": " 1. React.js\n 2. Node.js \n 3. Java\n 4. Mongo DB",
       "qualificationAndExperience": "1. Computer Science Degree\n2. Problem Solving Skill",
-      "aboutCompany": "Most highest Valuable company in Sri Lanka",
-      "applystudents": [
-        {
-          "id": 1,
-          "email": "wtgihan@gmail.com"
-        }
-      ]
+      "aboutCompany": "Most highest Valuable company in Sri Lanka"
     },
     {
       "id": 2,
@@ -117,6 +93,18 @@
       "technologies": "1.React JS\n2.Mongo DB\n3.Java\n4.Springboot",
       "qualificationAndExperience": "1.Computer science degree",
       "aboutCompany": "1.Most accurate company\n2.Very consider output in time"
+    }
+  ],
+  "application": [
+    {
+      "id": 1,
+      "companyId": 1,
+      "studentId": 1
+    },
+    {
+      "companyId": 2,
+      "studentId": 1,
+      "id": 2
     }
   ]
 }

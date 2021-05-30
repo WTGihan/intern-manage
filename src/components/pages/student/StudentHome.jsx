@@ -11,7 +11,9 @@ function StudentHome() {
 
   const loadCompaies = async () => {
     const result = await axios.get("http://localhost:3004/companies");
-    setCompany(result.data);
+    setCompany(
+      result.data.filter((company) => company.adminAcception === "Accepted")
+    );
   };
 
   return (

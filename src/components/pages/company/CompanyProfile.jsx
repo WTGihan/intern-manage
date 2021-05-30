@@ -6,6 +6,9 @@ function CompanyProfile({ loginUser }) {
   const userType = loginUser.userType;
   const url = window.location.pathname.split("/");
   const viewType = url[2];
+
+  let alreadyApplications = false;
+
   const [company, setCompany] = useState({
     username: "",
     adminAcception: "",
@@ -18,26 +21,82 @@ function CompanyProfile({ loginUser }) {
     aboutCompany: "",
   });
 
+  const [student, setStudent] = useState({
+    id: "",
+    // username: "",
+    adminAcception: "",
+    // studentName: "",
+    // email: "",
+    // contactnumber: "",
+    // university: "",
+    // languageSkill: "",
+    // softSkill: "",
+    // projects: "",
+  });
+
+  const [application, setApplication] = useState({
+    id: "",
+    companyId: "",
+    studentId: "",
+  });
+
+  // const [alreadyapplication, setAlreadyApplication] = useState({
+  //   status: false,
+  // });
+
   const { id } = useParams();
   useEffect(() => {
-    const loadCompany = async () => {
-      if (id === undefined) {
-        const loginUseremail = loginUser.email;
-        const result = await axios.get("http://localhost:3004/companies");
-        const students = result.data;
-        const newresult = students.filter(
-          (data) => data.useremail === loginUseremail
-        );
-        newresult.forEach((data) => {
-          setCompany(data);
-        });
-      } else {
-        const result = await axios.get(`http://localhost:3004/companies/${id}`);
-        setCompany(result.data);
-      }
-    };
     loadCompany();
+    // loadStudent();
+    // loadApplication();
   }, [loginUser]);
+
+  const loadCompany = async () => {
+    let studentId = "";
+    if (id === undefined) {
+      const loginUseremail = loginUser.email;
+      const result = await axios.get("http://localhost:3004/companies");
+      const allcompanies = result.data;
+      const newresult = allcompanies.filter(
+        (data) => data.useremail === loginUseremail
+      );
+      newresult.forEach((data) => {
+        setCompany(data);
+      });
+    }
+    if (userType === "Student") {
+      const loginUserEmail = loginUser.email;
+      const result = await axios.get("http://localhost:3004/students");
+      const students = result.data;
+      const newstudent = students.filter(
+        (data) => data.email === loginUserEmail
+      );
+      // console.log(newstudent[id]);
+
+      newstudent.forEach((data) => {
+        studentId = data.id;
+        setStudent(data);
+      });
+    }
+    if (id !== undefined && userType === "Student") {
+      // id is equal to company id
+      // console.log(id);
+      // console.log(studentId);
+      // get all application details
+      const applications = await axios.get("http://localhost:3004/application");
+      const applicationsResult = applications.data;
+      applicationsResult.forEach((data) => {
+        if (data.companyId == id && data.studentId == studentId) {
+          // SET APPLICATIONS DATA
+          setApplication(data);
+        }
+      });
+    }
+    if (id !== undefined) {
+      const result = await axios.get(`http://localhost:3004/companies/${id}`);
+      setCompany(result.data);
+    }
+  };
 
   const deleteCompany = async (id) => {
     const loginUseremail = loginUser.email;
@@ -72,6 +131,17 @@ function CompanyProfile({ loginUser }) {
     await axios.put(`http://localhost:3004/companies/${id}`, newCompany);
     window.location = "/request-companies";
   };
+
+  const applyForCompany = async (id) => {
+    let newapplication = {};
+    newapplication.companyId = parseInt(id);
+    newapplication.studentId = student.id;
+    // console.log(newapplication);
+    await axios.post("http://localhost:3004/application", newapplication);
+    window.location = "/";
+  };
+
+  // console.log(application);
 
   return (
     <div className="container  w-50 m-auto">
@@ -183,15 +253,22 @@ function CompanyProfile({ loginUser }) {
             </div>
           </div>
 
-          {id && userType === "Student" && (
-            <React.Fragment>
-              <div className="btn-group mr-2">
-                <Link className="btn btn-secondary" to="/company-profile">
-                  Apply For Company
-                </Link>
-              </div>
-            </React.Fragment>
-          )}
+          {id &&
+            userType === "Student" &&
+            student.adminAcception === "Accepted" &&
+            !application.id && (
+              <React.Fragment>
+                <div className="btn-group mr-2">
+                  <Link
+                    className="btn btn-secondary"
+                    onClick={() => applyForCompany(id)}
+                    to="/"
+                  >
+                    Apply For Company
+                  </Link>
+                </div>
+              </React.Fragment>
+            )}
           {id && userType === "CampusAdmin" && viewType === "view" && (
             <React.Fragment>
               <div className="btn-group mr-2">
