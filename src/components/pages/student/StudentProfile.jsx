@@ -4,6 +4,10 @@ import { Link, useParams } from "react-router-dom";
 
 function StudentProfile({ loginUser }) {
   const userType = loginUser.userType;
+  const url = window.location.pathname.split("/");
+  const viewType = url[2];
+  // console.log(url[2]);
+
   const [student, setStudent] = useState({
     id: "",
     username: "",
@@ -35,6 +39,12 @@ function StudentProfile({ loginUser }) {
         const result = await axios.get(`http://localhost:3004/students/${id}`);
         setStudent(result.data);
       }
+      // let loginResult = JSON.parse(localStorage.getItem("loginUser"));
+      // const loginUser = {
+      //   email: loginResult.email,
+      //   userType: loginResult.userType,
+      // };
+      // localStorage.setItem("loginUser", JSON.stringify(loginUser));
     };
     loadStudents();
   }, [loginUser]);
@@ -171,7 +181,7 @@ function StudentProfile({ loginUser }) {
               />
             </div>
           </div>
-          {id && userType === "CampusAdmin" && (
+          {id && userType === "CampusAdmin" && viewType === "view" && (
             <React.Fragment>
               <div className="btn-group mr-2">
                 <Link

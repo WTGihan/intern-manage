@@ -76,7 +76,7 @@ function Navbar({ loginUser }) {
                       </NavLink>
                     </li>
                     <li className="nav-item">
-                      <NavLink className="nav-link" exact to="/companies">
+                      <NavLink className="nav-link" exact to="/students">
                         Students
                       </NavLink>
                     </li>

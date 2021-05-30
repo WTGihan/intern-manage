@@ -1,4 +1,5 @@
 import React from "react";
+import AdminHome from "../campus-admin/AdminHome";
 import CompanyHome from "../company/CompanyHome";
 import StudentHome from "../student/StudentHome";
 
@@ -14,6 +15,11 @@ function Home({ loginUser }) {
       {userType === "Company" && (
         <React.Fragment>
           <CompanyHome />
+        </React.Fragment>
+      )}
+      {userType === "CampusAdmin" && (
+        <React.Fragment>
+          <AdminHome />
         </React.Fragment>
       )}
     </div>

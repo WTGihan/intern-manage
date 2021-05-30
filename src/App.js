@@ -19,6 +19,8 @@ import AdminProfile from "./components/pages/campus-admin/AdminProfile";
 import AdminEdit from "./components/pages/campus-admin/AdminEdit";
 import RequestCompanies from "./components/pages/campus-admin/RequestCompanies";
 import RequestStudents from "./components/pages/campus-admin/RequestStudents";
+import Students from "./components/pages/common/Students";
+import Companies from "./components/pages/common/Companies";
 
 function App() {
   const [loginUser, setLoginUser] = useState([]);
@@ -84,9 +86,17 @@ function App() {
             path="/student/view/:id"
             render={(props) => <StudentProfile loginUser={loginUser} />}
           />
+          <Route
+            exact
+            path="/student/viewonly/:id"
+            render={(props) => <StudentProfile loginUser={loginUser} />}
+          />
           <Route exact path="/admin-profile/edit/:id" component={AdminEdit} />
           <Route exact path="/request-companies" component={RequestCompanies} />
           <Route exact path="/request-students" component={RequestStudents} />
+
+          <Route exact path="/students" component={Students} />
+          <Route exact path="/companies" component={Companies} />
 
           <Route exact path="/signin" component={SignIn} />
           <Route exact path="/signup" component={SignUp} />
