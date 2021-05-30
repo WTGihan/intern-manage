@@ -7,7 +7,7 @@ function CompanyProfile({ loginUser }) {
   const url = window.location.pathname.split("/");
   const viewType = url[2];
 
-  let alreadyApplications = false;
+  // let alreadyApplications = false;
 
   const [company, setCompany] = useState({
     username: "",
@@ -35,8 +35,6 @@ function CompanyProfile({ loginUser }) {
   const { id } = useParams();
   useEffect(() => {
     loadCompany();
-    // loadStudent();
-    // loadApplication();
   }, [loginUser]);
 
   const loadCompany = async () => {

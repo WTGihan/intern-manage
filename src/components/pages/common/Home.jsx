@@ -14,7 +14,7 @@ function Home({ loginUser }) {
       )}
       {userType === "Company" && (
         <React.Fragment>
-          <CompanyHome />
+          <CompanyHome loginUser={loginUser} />
         </React.Fragment>
       )}
       {userType === "CampusAdmin" && (
