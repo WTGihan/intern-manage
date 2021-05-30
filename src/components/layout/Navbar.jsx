@@ -53,8 +53,12 @@ function Navbar({ loginUser }) {
                       </NavLink>
                     </li>
                     <li className="nav-item">
-                      <NavLink className="nav-link" exact to="/students">
-                        Students
+                      <NavLink
+                        className="nav-link"
+                        exact
+                        to="/request-students"
+                      >
+                        Request Students
                       </NavLink>
                     </li>
                     <li className="nav-item">

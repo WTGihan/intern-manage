@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 function StudentProfile({ loginUser }) {
+  const userType = loginUser.userType;
   const [student, setStudent] = useState({
     id: "",
     username: "",
@@ -16,24 +17,27 @@ function StudentProfile({ loginUser }) {
     projects: "",
   });
 
+  const { id } = useParams();
+
   useEffect(() => {
     const loadStudents = async () => {
-      const loginUseremail = loginUser.email;
-      const result = await axios.get("http://localhost:3004/students");
-      const students = result.data;
-      const newresult = students.filter(
-        (data) => data.email === loginUseremail
-      );
-      newresult.forEach((data) => {
-        setStudent(data);
-      });
+      if (id === undefined) {
+        const loginUseremail = loginUser.email;
+        const result = await axios.get("http://localhost:3004/students");
+        const students = result.data;
+        const newresult = students.filter(
+          (data) => data.email === loginUseremail
+        );
+        newresult.forEach((data) => {
+          setStudent(data);
+        });
+      } else {
+        const result = await axios.get(`http://localhost:3004/students/${id}`);
+        setStudent(result.data);
+      }
     };
     loadStudents();
   }, [loginUser]);
-
-  // window.onbeforeunload = function (e) {
-  //   return onUnload();
-  // };
 
   const deleteStudent = async (id) => {
     const loginUseremail = loginUser.email;
@@ -48,6 +52,22 @@ function StudentProfile({ loginUser }) {
     await axios.delete(`http://localhost:3004/users/${userid}`);
     localStorage.removeItem("loginUser");
     window.location = "/";
+  };
+
+  const acceptStudent = async (id) => {
+    const result = await axios.get(`http://localhost:3004/students/${id}`);
+    let newStudent = result.data;
+    newStudent.adminAcception = "Accepted";
+    await axios.put(`http://localhost:3004/students/${id}`, newStudent);
+    window.location = "/request-students";
+  };
+
+  const declineStudent = async (id) => {
+    const result = await axios.get(`http://localhost:3004/students/${id}`);
+    let newStudent = result.data;
+    newStudent.adminAcception = "AdminDeclined";
+    await axios.put(`http://localhost:3004/students/${id}`, newStudent);
+    window.location = "/request-students";
   };
 
   return (
@@ -151,24 +171,50 @@ function StudentProfile({ loginUser }) {
               />
             </div>
           </div>
+          {id && userType === "CampusAdmin" && (
+            <React.Fragment>
+              <div className="btn-group mr-2">
+                <Link
+                  className="btn btn-primary"
+                  onClick={() => acceptStudent(id)}
+                  to="/request-students"
+                >
+                  Accept
+                </Link>
+              </div>
+              <div className="btn-group mr-2">
+                <Link
+                  className="btn btn-danger"
+                  onClick={() => declineStudent(id)}
+                  to="/request-students"
+                >
+                  Decline
+                </Link>
+              </div>
+            </React.Fragment>
+          )}
 
-          <div className="btn-group mr-2">
-            <Link
-              className="btn btn-primary"
-              to={`/student-profile/edit/${student.id}`}
-            >
-              Edit
-            </Link>
-          </div>
-          <div className="btn-group mr-2">
-            <Link
-              className="btn btn-danger"
-              to="/"
-              onClick={() => deleteStudent(student.id)}
-            >
-              Delete
-            </Link>
-          </div>
+          {!id && (
+            <React.Fragment>
+              <div className="btn-group mr-2">
+                <Link
+                  className="btn btn-primary"
+                  to={`/student-profile/edit/${student.id}`}
+                >
+                  Edit
+                </Link>
+              </div>
+              <div className="btn-group mr-2">
+                <Link
+                  className="btn btn-danger"
+                  to="/"
+                  onClick={() => deleteStudent(student.id)}
+                >
+                  Delete
+                </Link>
+              </div>
+            </React.Fragment>
+          )}
         </form>
       </div>
     </div>
