@@ -48,7 +48,7 @@ function CompanyHome({ loginUser }) {
         }
       });
 
-      // console.log(applicationArray.length);
+      console.log(applicationArray.length);
 
       // get students
 
