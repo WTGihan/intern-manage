@@ -85,6 +85,30 @@ function CompanyProfile({ loginUser }) {
   };
 
   const deleteCompany = async (id) => {
+    // Check company in application table
+    const application = await axios.get("http://localhost:3004/application");
+    const applicationResult = application.data;
+    let newid = parseInt(id);
+    let applicationArray = [];
+    let i = 0;
+
+    applicationResult.forEach((data) => {
+      if (data.companyId === newid) {
+        // console.log(newid);
+        applicationArray[i] = data.id;
+        i++;
+      }
+    });
+
+    // console.log(applicationArray[0]);
+    // If have this company in application table delete it
+    for (let j = 0; j < applicationArray.length; j++) {
+      await axios.delete(
+        `http://localhost:3004/application/${applicationArray[j]}`
+      );
+      // console.log(`http://localhost:3004/application/${applicationArray[j]}`);
+    }
+
     const loginUseremail = loginUser.email;
     await axios.delete(`http://localhost:3004/companies/${id}`);
 
@@ -97,6 +121,7 @@ function CompanyProfile({ loginUser }) {
       userid = data.id;
     });
 
+    // Delete use
     await axios.delete(`http://localhost:3004/users/${userid}`);
     localStorage.removeItem("loginUser");
     window.location = "/";

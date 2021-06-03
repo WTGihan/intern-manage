@@ -51,16 +51,6 @@ function StudentProfile({ loginUser }) {
 
   const deleteStudent = async (id) => {
     const loginUseremail = loginUser.email;
-    await axios.delete(`http://localhost:3004/students/${id}`);
-    const result = await axios.get("http://localhost:3004/users");
-    const users = result.data;
-    const newresult = users.filter((data) => data.email === loginUseremail);
-    let userid = "";
-    newresult.forEach((data) => {
-      userid = data.id;
-    });
-    await axios.delete(`http://localhost:3004/users/${userid}`);
-
     // check student has company applications
     const applications = await axios.get("http://localhost:3004/application");
     const applicationResult = applications.data;
@@ -76,9 +66,19 @@ function StudentProfile({ loginUser }) {
 
     for (let j = 0; j < applicationArray.length; j++) {
       await axios.delete(
-        `http://localhost:3004/application/${applicationArray[i]}`
+        `http://localhost:3004/application/${applicationArray[j]}`
       );
     }
+
+    await axios.delete(`http://localhost:3004/students/${id}`);
+    const result = await axios.get("http://localhost:3004/users");
+    const users = result.data;
+    const newresult = users.filter((data) => data.email === loginUseremail);
+    let userid = "";
+    newresult.forEach((data) => {
+      userid = data.id;
+    });
+    await axios.delete(`http://localhost:3004/users/${userid}`);
 
     localStorage.removeItem("loginUser");
     window.location = "/";
