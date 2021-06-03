@@ -21,6 +21,10 @@ function StudentProfile({ loginUser }) {
     projects: "",
   });
 
+  const [applicationStatus, setApplicationStatus] = useState({
+    companyAcception: "",
+  });
+
   const { id } = useParams();
 
   useEffect(() => {
@@ -38,13 +42,42 @@ function StudentProfile({ loginUser }) {
       } else {
         const result = await axios.get(`http://localhost:3004/students/${id}`);
         setStudent(result.data);
+        if (userType === "Company" && viewType === "viewonly") {
+          const applications = await axios.get(
+            "http://localhost:3004/application"
+          );
+          const applicationResult = applications.data;
+
+          // Get company id from
+          const loginUseremail = loginUser.email;
+          const allCompanies = await axios.get(
+            "http://localhost:3004/companies"
+          );
+          const allCompaniesResult = allCompanies.data;
+          let companyId = 0;
+          allCompaniesResult.forEach((data) => {
+            if (data.useremail === loginUseremail) {
+              companyId = data.id;
+            }
+          });
+
+          let newid = parseInt(id);
+          let applicationId;
+          applicationResult.forEach((data) => {
+            if (data.studentId === newid && data.companyId === companyId) {
+              applicationId = data.id;
+            }
+          });
+
+          // console.log(applicationId);
+
+          const result = await axios.get(
+            `http://localhost:3004/application/${applicationId}`
+          );
+          let application = result.data;
+          setApplicationStatus(application.companyAcception);
+        }
       }
-      // let loginResult = JSON.parse(localStorage.getItem("loginUser"));
-      // const loginUser = {
-      //   email: loginResult.email,
-      //   userType: loginResult.userType,
-      // };
-      // localStorage.setItem("loginUser", JSON.stringify(loginUser));
     };
     loadStudents();
   }, [loginUser]);
@@ -99,6 +132,48 @@ function StudentProfile({ loginUser }) {
     await axios.put(`http://localhost:3004/students/${id}`, newStudent);
     window.location = "/request-students";
   };
+
+  const acceptStudentByCompany = async (id) => {
+    const applications = await axios.get("http://localhost:3004/application");
+    const applicationResult = applications.data;
+
+    // Get company id from
+    const loginUseremail = loginUser.email;
+    const allCompanies = await axios.get("http://localhost:3004/companies");
+    const allCompaniesResult = allCompanies.data;
+
+    // console.log(allCompaniesResult);
+    // console.log(loginUseremail);
+    let companyId = 0;
+    allCompaniesResult.forEach((data) => {
+      if (data.useremail === loginUseremail) {
+        companyId = data.id;
+        // console.log(companyId);
+      }
+    });
+
+    // console.log(companyId);
+    let newid = parseInt(id);
+    let applicationId;
+    applicationResult.forEach((data) => {
+      if (data.studentId === newid && data.companyId === companyId) {
+        applicationId = data.id;
+      }
+    });
+
+    // console.log(applicationId);
+
+    const result = await axios.get(
+      `http://localhost:3004/application/${applicationId}`
+    );
+    let application = result.data;
+    application.companyAcception = "Accepted";
+    await axios.put(`http://localhost:3004/application/${id}`, application);
+
+    window.location = "/";
+  };
+
+  const declineStudentByCompany = (id) => {};
 
   return (
     <div className="container  w-50 m-auto">
@@ -232,6 +307,31 @@ function StudentProfile({ loginUser }) {
               </div>
             </React.Fragment>
           )}
+          {id &&
+            userType === "Company" &&
+            viewType === "viewonly" &&
+            applicationStatus !== "Accepted" && (
+              <React.Fragment>
+                <div className="btn-group mr-2">
+                  <Link
+                    className="btn btn-primary"
+                    onClick={() => acceptStudentByCompany(id)}
+                    to="/request-students"
+                  >
+                    Select Student
+                  </Link>
+                </div>
+                <div className="btn-group mr-2">
+                  <Link
+                    className="btn btn-danger"
+                    onClick={() => declineStudentByCompany(id)}
+                    to="/request-students"
+                  >
+                    Reject Student
+                  </Link>
+                </div>
+              </React.Fragment>
+            )}
 
           {!id && (
             <React.Fragment>

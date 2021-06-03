@@ -99,12 +99,14 @@
     {
       "id": 1,
       "companyId": 1,
-      "studentId": 1
+      "studentId": 1,
+      "companyAcception": "Accepted"
     },
     {
       "companyId": 2,
       "studentId": 1,
-      "id": 2
+      "id": 2,
+      "companyAcception": "NotAccepted"
     }
   ]
 }
