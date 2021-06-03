@@ -142,17 +142,13 @@ function StudentProfile({ loginUser }) {
     const allCompanies = await axios.get("http://localhost:3004/companies");
     const allCompaniesResult = allCompanies.data;
 
-    // console.log(allCompaniesResult);
-    // console.log(loginUseremail);
     let companyId = 0;
     allCompaniesResult.forEach((data) => {
       if (data.useremail === loginUseremail) {
         companyId = data.id;
-        // console.log(companyId);
       }
     });
 
-    // console.log(companyId);
     let newid = parseInt(id);
     let applicationId;
     applicationResult.forEach((data) => {
@@ -160,8 +156,6 @@ function StudentProfile({ loginUser }) {
         applicationId = data.id;
       }
     });
-
-    // console.log(applicationId);
 
     const result = await axios.get(
       `http://localhost:3004/application/${applicationId}`
@@ -173,7 +167,41 @@ function StudentProfile({ loginUser }) {
     window.location = "/";
   };
 
-  const declineStudentByCompany = (id) => {};
+  const declineStudentByCompany = async (id) => {
+    const applications = await axios.get("http://localhost:3004/application");
+    const applicationResult = applications.data;
+
+    // Get company id from
+    const loginUseremail = loginUser.email;
+    const allCompanies = await axios.get("http://localhost:3004/companies");
+    const allCompaniesResult = allCompanies.data;
+
+    let companyId = 0;
+    allCompaniesResult.forEach((data) => {
+      if (data.useremail === loginUseremail) {
+        companyId = data.id;
+      }
+    });
+
+    let newid = parseInt(id);
+    let applicationId;
+    applicationResult.forEach((data) => {
+      if (data.studentId === newid && data.companyId === companyId) {
+        applicationId = data.id;
+      }
+    });
+
+    const result = await axios.get(
+      `http://localhost:3004/application/${applicationId}`
+    );
+    let application = result.data;
+    application.companyAcception = "Rejected";
+    await axios.put(`http://localhost:3004/application/${id}`, application);
+
+    window.location = "/";
+  };
+
+  // console.log(applicationStatus);
 
   return (
     <div className="container  w-50 m-auto">
@@ -310,13 +338,14 @@ function StudentProfile({ loginUser }) {
           {id &&
             userType === "Company" &&
             viewType === "viewonly" &&
-            applicationStatus !== "Accepted" && (
+            applicationStatus !== "Accepted" &&
+            applicationStatus !== "Rejected" && (
               <React.Fragment>
                 <div className="btn-group mr-2">
                   <Link
                     className="btn btn-primary"
                     onClick={() => acceptStudentByCompany(id)}
-                    to="/request-students"
+                    to="/"
                   >
                     Select Student
                   </Link>
@@ -325,7 +354,7 @@ function StudentProfile({ loginUser }) {
                   <Link
                     className="btn btn-danger"
                     onClick={() => declineStudentByCompany(id)}
-                    to="/request-students"
+                    to="/"
                   >
                     Reject Student
                   </Link>
