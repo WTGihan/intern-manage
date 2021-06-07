@@ -26,7 +26,7 @@ function StudentCreate() {
   const onSubmit = async (e) => {
     e.preventDefault();
     // await axios.post("http://localhost:3004/students", student);
-    const result = await addNewStudent(student);
+    await addNewStudent(student);
     let result = JSON.parse(localStorage.getItem("loginUser"));
     const loginUser = {
       email: result.email,

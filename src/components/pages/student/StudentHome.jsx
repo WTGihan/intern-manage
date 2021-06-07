@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { Link } from "react-router-dom";
 import { getCompanies } from "./../../../services/CompanyService";
 
@@ -11,12 +10,13 @@ function StudentHome() {
   }, []);
 
   const loadCompaies = async () => {
-    // const result = await axios.get("http://localhost:3004/companies");
     const result = await getCompanies();
     setCompany(
       result.data.filter((company) => company.adminAcception === "Accepted")
     );
   };
+
+  console.log(companies);
 
   return (
     <div className="container">

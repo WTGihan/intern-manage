@@ -162,7 +162,7 @@ function StudentProfile({ loginUser }) {
 
   const acceptStudentByCompany = async (id) => {
     // const applications = await axios.get("http://localhost:3004/application");
-    const application = await getApplications();
+    const applications = await getApplications();
     const applicationResult = applications.data;
 
     // Get company id from

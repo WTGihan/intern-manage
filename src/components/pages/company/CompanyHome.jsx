@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { getCompanies } from "./../../../services/CompanyService";
-import { getApplications } from "./../../../services/ApplicationService";
+import {
+  getApplications,
+  getApplicationDetails,
+} from "./../../../services/ApplicationService";
 
 function CompanyHome({ loginUser }) {
   const [company, setCompany] = useState({

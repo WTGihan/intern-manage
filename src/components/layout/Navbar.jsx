@@ -30,6 +30,11 @@ function Navbar({ loginUser }) {
                         Student Profile
                       </NavLink>
                     </li>
+                    <li className="nav-item">
+                      <NavLink className="nav-link" exact to="/apply-companies">
+                        Apply Companies
+                      </NavLink>
+                    </li>
                   </React.Fragment>
                 )}
                 {userType === "Company" && (
