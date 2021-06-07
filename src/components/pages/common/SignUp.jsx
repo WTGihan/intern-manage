@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import passwordHash from "password-hash";
+import { addNewUser } from "../../../services/UserService";
 
 function SignUp() {
   // Email must be unique
@@ -31,7 +32,8 @@ function SignUp() {
 
     localStorage.setItem("loginUser", JSON.stringify(loginUser));
 
-    await axios.post("http://localhost:3004/users", result);
+    // await axios.post("http://localhost:3004/users", result);
+    await addNewUser(result);
     if (result.userType === "Student") {
       window.location = "/student-create";
     }

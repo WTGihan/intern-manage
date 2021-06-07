@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useHistory, useParams } from "react-router-dom";
+import {
+  editCampusAdminDetails,
+  getCampusAdminDetails,
+} from "./../../../services/CampusAdminService";
 
 function AdminEdit() {
   let history = useHistory();
@@ -20,7 +24,8 @@ function AdminEdit() {
 
   useEffect(() => {
     const loadAdmin = async () => {
-      const result = await axios.get(`http://localhost:3004/campusAdmin/${id}`);
+      // const result = await axios.get(`http://localhost:3004/campusAdmin/${id}`);
+      const result = await getCampusAdminDetails(id);
       setAdmin(result.data);
     };
 
@@ -33,7 +38,8 @@ function AdminEdit() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    await axios.put(`http://localhost:3004/campusAdmin/${id}`, admin);
+    // await axios.put(`http://localhost:3004/campusAdmin/${id}`, admin);
+    await editCampusAdminDetails(id, admin);
     history.push("/admin-profile");
   };
 

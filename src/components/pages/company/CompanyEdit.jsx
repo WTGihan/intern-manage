@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { useHistory, useParams } from "react-router-dom";
+import {
+  editCompanyDetails,
+  getCompanyDetails,
+} from "./../../../services/CompanyService";
 
 function CompanyEdit() {
   let history = useHistory();
@@ -20,7 +23,8 @@ function CompanyEdit() {
 
   useEffect(() => {
     const loadCompany = async () => {
-      const result = await axios.get(`http://localhost:3004/companies/${id}`);
+      // const result = await axios.get(`http://localhost:3004/companies/${id}`);
+      const result = await getCompanyDetails(id);
       setCompany(result.data);
     };
     loadCompany();
@@ -32,7 +36,8 @@ function CompanyEdit() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    await axios.put(`http://localhost:3004/companies/${id}`, company);
+    // await axios.put(`http://localhost:3004/companies/${id}`, company);
+    await editCompanyDetails(company);
     history.push("/company-profile");
   };
 

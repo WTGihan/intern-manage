@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { getCompanies } from "./../../../services/CompanyService";
 
 function Companies() {
   const [companies, setCompanies] = useState([]);
@@ -10,7 +11,8 @@ function Companies() {
   }, []);
 
   const loadCompanies = async () => {
-    const result = await axios.get("http://localhost:3004/companies");
+    // const result = await axios.get("http://localhost:3004/companies");
+    const result = await getCompanies();
     setCompanies(
       result.data.filter((company) => company.adminAcception === "Accepted")
     );

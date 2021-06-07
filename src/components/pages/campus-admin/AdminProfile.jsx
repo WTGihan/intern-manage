@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { getCampusAdmins } from "./../../../services/CampusAdminService";
 
 function AdminProfile({ loginUser }) {
   const [admin, setAdmin] = useState({
@@ -15,7 +16,8 @@ function AdminProfile({ loginUser }) {
   useEffect(() => {
     const loadAdmin = async () => {
       const loginUseremail = loginUser.email;
-      const result = await axios.get("http://localhost:3004/campusAdmin");
+      // const result = await axios.get("http://localhost:3004/campusAdmin");
+      const result = await getCampusAdmins();
       const admin = result.data;
       const newresult = admin.filter((data) => data.email === loginUseremail);
       newresult.forEach((data) => {

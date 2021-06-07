@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { getStudents } from "./../../../services/StudentService";
 
 function Students() {
   const [students, setStudents] = useState([]);
@@ -10,7 +11,8 @@ function Students() {
   }, []);
 
   const loadStudents = async () => {
-    const result = await axios.get("http://localhost:3004/students");
+    // const result = await axios.get("http://localhost:3004/students");
+    const result = await getStudents();
     setStudents(
       result.data.filter((student) => student.adminAcception === "Accepted")
     );

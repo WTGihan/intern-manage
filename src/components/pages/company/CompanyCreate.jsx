@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import { getCompanies } from "./../../../services/CompanyService";
 
 function CompanyCreate() {
   let result = JSON.parse(localStorage.getItem("loginUser"));
@@ -25,7 +25,8 @@ function CompanyCreate() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    await axios.post("http://localhost:3004/companies", company);
+    // await axios.post("http://localhost:3004/companies", company);
+    await getCompanies();
     let result = JSON.parse(localStorage.getItem("loginUser"));
     const loginUser = {
       email: result.email,

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import passwordHash from "password-hash";
+import { getUsers } from "./../../../services/UserService";
 
 function SignIn() {
   const [user, setUser] = useState({
@@ -15,7 +16,8 @@ function SignIn() {
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    const result = await axios.get("http://localhost:3004/users");
+    // const result = await axios.get("http://localhost:3004/users");
+    const result = await getUsers();
     const users = result.data;
     let validUser = false;
     let loginUser = {};

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { Link } from "react-router-dom";
+import { getCompanies } from "./../../../services/CompanyService";
+import { getApplications } from "./../../../services/ApplicationService";
 
 function CompanyHome({ loginUser }) {
   const [company, setCompany] = useState({
@@ -16,7 +17,8 @@ function CompanyHome({ loginUser }) {
 
   const loadCompany = async () => {
     const loginUserEmail = loginUser.email;
-    const result = await axios.get("http://localhost:3004/companies");
+    // const result = await axios.get("http://localhost:3004/companies");
+    const result = await getCompanies();
     const allCompanies = result.data;
     const newResult = allCompanies.filter(
       (data) => data.useremail === loginUserEmail
@@ -33,9 +35,10 @@ function CompanyHome({ loginUser }) {
 
     if (adminAcception === "Accepted") {
       // load applied students
-      const resultStudent = await axios.get(
-        "http://localhost:3004/application"
-      );
+      // const resultStudent = await axios.get(
+      //   "http://localhost:3004/application"
+      // );
+      const resultStudent = await getApplications();
       // console.log("hello");
       const applyStudentResult = resultStudent.data;
 
@@ -56,9 +59,10 @@ function CompanyHome({ loginUser }) {
         let allApplyStudents = [];
         for (let j = 0; j < applicationArray.length; j++) {
           // console.log(applicationArray[i]);
-          const result = await axios.get(
-            `http://localhost:3004/students/${applicationArray[j]}`
-          );
+          // const result = await axios.get(
+          //   `http://localhost:3004/students/${applicationArray[j]}`
+          // );
+          const result = await getApplicationDetails(applicationArray[j]);
           const applystudent = result.data;
           if (applystudent.adminAcception === "Accepted") {
             allApplyStudents = allApplyStudents.concat(applystudent);
