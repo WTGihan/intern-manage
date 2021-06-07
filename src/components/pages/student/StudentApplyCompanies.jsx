@@ -10,7 +10,7 @@ function StudentApplyCompanies() {
   useEffect(() => {
     const loadApplyCompanies = async () => {
       //   loadUserDetails
-      console.log("1");
+      //   console.log("1");
       const loginUserEmail = loginUser.email;
       const result = await getStudents();
       const students = result.data;
@@ -53,10 +53,10 @@ function StudentApplyCompanies() {
       setApplyCompanies(companies);
     };
     loadApplyCompanies();
-    console.log("2");
+    // console.log("2");
   }, []);
 
-  console.log(applyCompanies);
+  //   console.log(applyCompanies);
   return (
     <div className="container">
       <div className="py-4">
@@ -73,20 +73,36 @@ function StudentApplyCompanies() {
             </tr>
           </thead>
           <tbody>
-            {/* {applyCompanies.length !== 0 && ( */}
-            <React.Fragment>
-              {applyCompanies.map((company, index) => (
-                <tr key={index + 1}>
-                  <th scope="row">{index + 1}</th>
-                  <td>{company.companyName}</td>
-                  <td>{company.companyAdminName}</td>
-                  <td>{company.companyEmail}</td>
-                  <td>{company.companyContactNumber}</td>
-                  <td>{company.companyApplicationStatus}</td>
-                </tr>
-              ))}
-            </React.Fragment>
-            {/* )} */}
+            {Array.isArray(applyCompanies) === true && (
+              <React.Fragment>
+                {applyCompanies.map((company, index) => (
+                  <tr key={index + 1}>
+                    <th scope="row">{index + 1}</th>
+                    <td>{company.companyName}</td>
+                    <td>{company.companyAdminName}</td>
+                    <td>{company.companyEmail}</td>
+                    <td>{company.companyContactNumber}</td>
+                    <td>
+                      {company.companyApplicationStatus === "Rejected" && (
+                        <div className="btn btn-danger">
+                          {company.companyApplicationStatus}
+                        </div>
+                      )}
+                      {company.companyApplicationStatus === "NotAccepted" && (
+                        <div className="btn btn-primary">
+                          {company.companyApplicationStatus}
+                        </div>
+                      )}
+                      {company.companyApplicationStatus === "Accepted" && (
+                        <div className="btn btn-success">
+                          {company.companyApplicationStatus}
+                        </div>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </React.Fragment>
+            )}
           </tbody>
         </table>
       </div>

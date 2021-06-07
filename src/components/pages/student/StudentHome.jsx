@@ -16,7 +16,7 @@ function StudentHome() {
     );
   };
 
-  console.log(companies);
+  // console.log(companies);
 
   return (
     <div className="container">
