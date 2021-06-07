@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { addNewStudent } from "../../../services/StudentService";
 
 function StudentCreate() {
   let result = JSON.parse(localStorage.getItem("loginUser"));
@@ -24,7 +25,8 @@ function StudentCreate() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    await axios.post("http://localhost:3004/students", student);
+    // await axios.post("http://localhost:3004/students", student);
+    const result = await addNewStudent(student);
     let result = JSON.parse(localStorage.getItem("loginUser"));
     const loginUser = {
       email: result.email,

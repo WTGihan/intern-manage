@@ -1,12 +1,22 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
+import {
+  getStudentDetails,
+  getStudents,
+  deleteStudent,
+} from "./../../../services/StudentService";
+import {
+  getApplications,
+  getApplicationDetails,
+  deleteApplication,
+} from "./../../../services/ApplicationService";
+import { getCompanies } from "./../../../services/CompanyService";
 
 function StudentProfile({ loginUser }) {
   const userType = loginUser.userType;
   const url = window.location.pathname.split("/");
   const viewType = url[2];
-  // console.log(url[2]);
 
   const [student, setStudent] = useState({
     id: "",
@@ -31,7 +41,8 @@ function StudentProfile({ loginUser }) {
     const loadStudents = async () => {
       if (id === undefined) {
         const loginUseremail = loginUser.email;
-        const result = await axios.get("http://localhost:3004/students");
+        // const result = await axios.get("http://localhost:3004/students");
+        const result = await getStudents();
         const students = result.data;
         const newresult = students.filter(
           (data) => data.email === loginUseremail
@@ -40,19 +51,22 @@ function StudentProfile({ loginUser }) {
           setStudent(data);
         });
       } else {
-        const result = await axios.get(`http://localhost:3004/students/${id}`);
+        // const result = await axios.get(`http://localhost:3004/students/${id}`);
+        const result = await getStudentDetails(id);
         setStudent(result.data);
         if (userType === "Company" && viewType === "viewonly") {
-          const applications = await axios.get(
-            "http://localhost:3004/application"
-          );
+          // const applications = await axios.get(
+          //   "http://localhost:3004/application"
+          // );
+          const applications = await getApplications();
           const applicationResult = applications.data;
 
           // Get company id from
           const loginUseremail = loginUser.email;
-          const allCompanies = await axios.get(
-            "http://localhost:3004/companies"
-          );
+          // const allCompanies = await axios.get(
+          //   "http://localhost:3004/companies"
+          // );
+          const allCompanies = await getCompanies();
           const allCompaniesResult = allCompanies.data;
           let companyId = 0;
           allCompaniesResult.forEach((data) => {
@@ -71,9 +85,10 @@ function StudentProfile({ loginUser }) {
 
           // console.log(applicationId);
 
-          const result = await axios.get(
-            `http://localhost:3004/application/${applicationId}`
-          );
+          // const result = await axios.get(
+          //   `http://localhost:3004/application/${applicationId}`
+          // );
+          const result = await getApplicationDetails(id);
           let application = result.data;
           setApplicationStatus(application.companyAcception);
         }
@@ -85,7 +100,8 @@ function StudentProfile({ loginUser }) {
   const deleteStudent = async (id) => {
     const loginUseremail = loginUser.email;
     // check student has company applications
-    const applications = await axios.get("http://localhost:3004/application");
+    // const applications = await axios.get("http://localhost:3004/application");
+    const applications = await getApplications();
     const applicationResult = applications.data;
     let newid = parseInt(id);
     let applicationArray = [];
@@ -98,12 +114,14 @@ function StudentProfile({ loginUser }) {
     });
 
     for (let j = 0; j < applicationArray.length; j++) {
-      await axios.delete(
-        `http://localhost:3004/application/${applicationArray[j]}`
-      );
+      // await axios.delete(
+      //   `http://localhost:3004/application/${applicationArray[j]}`
+      // );
+      await deleteApplication(applicationArray[j]);
     }
 
-    await axios.delete(`http://localhost:3004/students/${id}`);
+    // await axios.delete(`http://localhost:3004/students/${id}`);
+    await deleteStudent(id);
     const result = await axios.get("http://localhost:3004/users");
     const users = result.data;
     const newresult = users.filter((data) => data.email === loginUseremail);

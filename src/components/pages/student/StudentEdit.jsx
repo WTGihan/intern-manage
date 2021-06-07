@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useHistory, useParams } from "react-router-dom";
+import {
+  getStudentDetails,
+  editStudentDetails,
+} from "../../../services/StudentService";
 
 function StudentEdit() {
   let history = useHistory();
@@ -23,7 +27,8 @@ function StudentEdit() {
 
   useEffect(() => {
     const loadStudent = async () => {
-      const result = await axios.get(`http://localhost:3004/students/${id}`);
+      // const result = await axios.get(`http://localhost:3004/students/${id}`);
+      const result = await getStudentDetails(id);
       setStudent(result.data);
     };
     loadStudent();
@@ -35,7 +40,8 @@ function StudentEdit() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    await axios.put(`http://localhost:3004/students/${id}`, student);
+    // await axios.put(`http://localhost:3004/students/${id}`, student);
+    await editStudentDetails(id, student);
     history.push("/student-profile");
   };
 
