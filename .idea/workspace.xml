@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="099a7edf-575a-43ad-af44-f1c683465fcc" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/intern-app/.vscode/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/intern-app/.vscode/settings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/intern-app/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/intern-app/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/intern-app/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/intern-app/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/intern-app/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/intern-app/src/App.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/intern-app/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/intern-app/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/intern-app/src/components/layout/Navbar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/intern-app/src/components/layout/Navbar.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/intern-app/src/components/pages/campus-admin/AdminEdit.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/intern-app/src/components/pages/campus-admin/AdminEdit.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/intern-app/src/components/pages/campus-admin/AdminHome.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/intern-app/src/components/pages/campus-admin/AdminHome.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/intern-app/src/components/pages/campus-admin/AdminProfile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/intern-app/src/components/pages/campus-admin/AdminProfile.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/intern-app/src/components/pages/campus-admin/RequestCompanies.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/intern-app/src/components/pages/campus-admin/RequestCompanies.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/intern-app/src/components/pages/campus-admin/RequestStudents.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/intern-app/src/components/pages/campus-admin/RequestStudents.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/intern-app/src/components/pages/common/About.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/intern-app/src/components/pages/common/About.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/intern-app/src/components/pages/common/Companies.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/intern-app/src/components/pages/common/Companies.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/intern-app/src/components/pages/common/Home.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/intern-app/src/components/pages/common/Home.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/intern-app/src/components/pages/common/Logout.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/intern-app/src/components/pages/common/Logout.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/intern-app/src/components/pages/common/NotFound.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/intern-app/src/components/pages/common/NotFound.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/intern-app/src/components/pages/common/SignIn.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/intern-app/src/components/pages/common/SignIn.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/intern-app/src/components/pages/common/SignUp.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/intern-app/src/components/pages/common/SignUp.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/intern-app/src/components/pages/common/Students.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/intern-app/src/components/pages/common/Students.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/intern-app/src/components/pages/company/CompanyCreate.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/intern-app/src/components/pages/company/CompanyCreate.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/intern-app/src/components/pages/company/CompanyEdit.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/intern-app/src/components/pages/company/CompanyEdit.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/intern-app/src/components/pages/company/CompanyHome.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/intern-app/src/components/pages/company/CompanyHome.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/intern-app/src/components/pages/company/CompanyProfile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/intern-app/src/components/pages/company/CompanyProfile.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/intern-app/src/components/pages/company/CompanySelectStudent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/intern-app/src/components/pages/company/CompanySelectStudent.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/intern-app/src/components/pages/student/StudentApplyCompanies.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/intern-app/src/components/pages/student/StudentApplyCompanies.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/intern-app/src/components/pages/student/StudentCreate.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/intern-app/src/components/pages/student/StudentCreate.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/intern-app/src/components/pages/student/StudentEdit.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/intern-app/src/components/pages/student/StudentEdit.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/intern-app/src/components/pages/student/StudentHome.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/intern-app/src/components/pages/student/StudentHome.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/intern-app/src/components/pages/student/StudentProfile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/intern-app/src/components/pages/student/StudentProfile.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/intern-app/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/intern-app/src/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/intern-app/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/intern-app/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/intern-app/src/reportWebVitals.js" beforeDir="false" afterPath="$PROJECT_DIR$/intern-app/src/reportWebVitals.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/intern-app/src/services/ApplicationService.js" beforeDir="false" afterPath="$PROJECT_DIR$/intern-app/src/services/ApplicationService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/intern-app/src/services/CampusAdminService.js" beforeDir="false" afterPath="$PROJECT_DIR$/intern-app/src/services/CampusAdminService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/intern-app/src/services/CompanyService.js" beforeDir="false" afterPath="$PROJECT_DIR$/intern-app/src/services/CompanyService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/intern-app/src/services/StudentService.js" beforeDir="false" afterPath="$PROJECT_DIR$/intern-app/src/services/StudentService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/intern-app/src/services/UserService.js" beforeDir="false" afterPath="$PROJECT_DIR$/intern-app/src/services/UserService.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/intern-app" />
+  </component>
+  <component name="ProjectId" id="1tkzS1sdnxQWogKuvVjGZbkL1qC" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="099a7edf-575a-43ad-af44-f1c683465fcc" name="Default Changelist" comment="" />
+      <created>1623327872440</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1623327872440</updated>
+      <workItem from="1623327873633" duration="651000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
