@@ -38,7 +38,26 @@ public class UserController {
     public ResponseEntity<User> getUserById(@PathVariable Long id) {
         User user = userRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("User not exist id:"+id));
         return ResponseEntity.ok(user);
+    }
 
+//    update user
+    @PutMapping("/users/{id}")
+    public ResponseEntity<User> updateuser(@PathVariable Long id, @RequestBody User userDetails) {
+//        get data from db
 
+//        check email already taken by other party
+        Optional<User> userOptional = userRepository.findUserByIdNotAndEmail(id, userDetails.getEmail());
+        if(userOptional.isPresent()) {
+            throw new ResourceNotFoundException("Email Taken");
+        }
+
+        User user = userRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("User not exist id:"+id));
+
+        user.setEmail(userDetails.getEmail());
+        user.setPassword(userDetails.getPassword());
+        user.setUserType(userDetails.getUserType());
+
+        User updateUser = userRepository.save(user);
+        return ResponseEntity.ok(updateUser);
     }
 }
