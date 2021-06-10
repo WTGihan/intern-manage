@@ -1,6 +1,61 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { getApplications } from "../../../services/ApplicationService";
+import { getCompanies } from "../../../services/CompanyService";
+import { getStudentDetails } from "../../../services/StudentService";
 
 function CompanySelectStudent() {
+  const [selectStudents, setSelectStudents] = useState({});
+  let loginUser = JSON.parse(localStorage.getItem("loginUser"));
+
+  useEffect(() => {
+    const loadSelectStudents = async () => {
+      const loginUserEmail = loginUser.email;
+
+      //   get company details
+
+      const result = await getCompanies();
+      const companies = result.data;
+      const newResult = companies.filter(
+        (data) => data.useremail === loginUserEmail
+      );
+
+      let companyID;
+      newResult.forEach((data) => {
+        companyID = data.id;
+      });
+
+      //   console.log(companyID);
+
+      //   Then get all applications data for give company id
+      const resultApplication = await getApplications();
+      const applications = resultApplication.data;
+      const filterApplications = applications.filter(
+        (data) => data.companyId === companyID
+      );
+
+      console.log(filterApplications);
+
+      let students = [];
+      for (var key in filterApplications) {
+        let studentResult = await getStudentDetails(
+          filterApplications[key]["studentId"]
+        );
+        let student = studentResult.data;
+        let selectStudentDetails = {};
+        selectStudentDetails.studentName = student.studentName;
+        selectStudentDetails.email = student.email;
+        selectStudentDetails.contactnumber = student.contactnumber;
+        selectStudentDetails.status =
+          filterApplications[key]["companyAcception"];
+
+        students.push(selectStudentDetails);
+      }
+      setSelectStudents(students);
+    };
+    loadSelectStudents();
+  }, []);
+
+  console.log(selectStudents);
   return (
     <div className="container">
       <div className="py-4">
@@ -16,36 +71,23 @@ function CompanySelectStudent() {
             </tr>
           </thead>
           <tbody>
-            {/* {Array.isArray(applyCompanies) === true && (
+            {Array.isArray(selectStudents) === true && (
               <React.Fragment>
-                {applyCompanies.map((company, index) => (
+                {selectStudents.map((student, index) => (
                   <tr key={index + 1}>
                     <th scope="row">{index + 1}</th>
-                    <td>{company.companyName}</td>
-                    <td>{company.companyAdminName}</td>
-                    <td>{company.companyEmail}</td>
-                    <td>{company.companyContactNumber}</td>
+                    <td>{student.studentName}</td>
+                    <td>{student.email}</td>
+                    <td>{student.contactnumber}</td>
                     <td>
-                      {company.companyApplicationStatus === "Rejected" && (
-                        <div className="btn btn-danger">
-                          {company.companyApplicationStatus}
-                        </div>
-                      )}
-                      {company.companyApplicationStatus === "NotAccepted" && (
-                        <div className="btn btn-primary">
-                          {company.companyApplicationStatus}
-                        </div>
-                      )}
-                      {company.companyApplicationStatus === "Accepted" && (
-                        <div className="btn btn-success">
-                          {company.companyApplicationStatus}
-                        </div>
+                      {student.status === "Accepted" && (
+                        <div className="btn btn-success">{student.status}</div>
                       )}
                     </td>
                   </tr>
                 ))}
               </React.Fragment>
-            )} */}
+            )}
           </tbody>
         </table>
       </div>
