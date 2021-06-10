@@ -22,6 +22,7 @@ import RequestStudents from "./components/pages/campus-admin/RequestStudents";
 import Students from "./components/pages/common/Students";
 import Companies from "./components/pages/common/Companies";
 import StudentApplyCompanies from "./components/pages/student/StudentApplyCompanies";
+import CompanySelectStudent from "./components/pages/company/CompanySelectStudent";
 
 function App() {
   const [loginUser, setLoginUser] = useState([]);
@@ -79,6 +80,11 @@ function App() {
             exact
             path="/company-profile/edit/:id"
             component={CompanyEdit}
+          />
+          <Route
+            exact
+            path="/select-students"
+            component={CompanySelectStudent}
           />
 
           {/* Campus Admin */}

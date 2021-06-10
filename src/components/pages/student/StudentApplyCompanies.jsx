@@ -69,7 +69,7 @@ function StudentApplyCompanies() {
               <th scope="col">Company Admin</th>
               <th scope="col">Email</th>
               <th scope="col">Contact Number</th>
-              <th scope="col">Staus</th>
+              <th scope="col">Status</th>
             </tr>
           </thead>
           <tbody>
