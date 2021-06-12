@@ -20,9 +20,10 @@ public class Student implements Serializable {
     private String studentName;
 
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "email", referencedColumnName = "email")
-    private User email;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", unique = true)
+    private User user;
+
 
     @Column(name="contactnumber", length = 10)
     private String contactnumber;
@@ -45,11 +46,10 @@ public class Student implements Serializable {
 
     }
 
-    public Student(String username, String adminAcception, String studentName, String email, String contactnumber, String university, String languageSkill, String softSkill, String projects) {
+    public Student(String username, String adminAcception, String studentName, String contactnumber, String university, String languageSkill, String softSkill, String projects) {
         this.username = username;
         this.adminAcception = adminAcception;
         this.studentName = studentName;
-//        this.email = email;
         this.contactnumber = contactnumber;
         this.university = university;
         this.languageSkill = languageSkill;
@@ -89,12 +89,12 @@ public class Student implements Serializable {
         this.studentName = studentName;
     }
 
-    public String getEmail() {
-        return email.getEmail();
+    public User getUser() {
+        return user;
     }
 
-    public void setEmail(User email) {
-        this.email = email;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getContactnumber() {

@@ -18,7 +18,8 @@ public class User implements Serializable {
     @Column(name = "password")
     private String password;
 
-    @OneToOne(mappedBy = "email")
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @JoinColumn
     private Student student;
 
     public User() {
@@ -29,6 +30,10 @@ public class User implements Serializable {
         this.userType = userType;
         this.email = email;
         this.password = password;
+    }
+
+    public User(String email) {
+        this.email = email;
     }
 
     public void setId(long id) {
