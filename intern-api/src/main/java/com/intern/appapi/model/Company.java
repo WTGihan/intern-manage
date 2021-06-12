@@ -35,6 +35,10 @@ public class Company {
     @Column(name="aboutCompany")
     private String aboutCompany;
 
+    @OneToOne(mappedBy = "company", cascade = CascadeType.REMOVE)
+    @JoinColumn
+    private Application application;
+
 
     public Company() {
 

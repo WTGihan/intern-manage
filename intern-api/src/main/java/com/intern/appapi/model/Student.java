@@ -42,6 +42,10 @@ public class Student implements Serializable {
     @Column(name="projects")
     private String projects;
 
+    @OneToOne(mappedBy = "student", cascade = CascadeType.REMOVE)
+    @JoinColumn
+    private Application application;
+
     public Student() {
 
     }
