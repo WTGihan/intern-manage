@@ -32,7 +32,7 @@ public class StudentController {
     //    create student
     @PostMapping("/students")
     public Student createStudent(@RequestBody Student student) {
-        System.out.print(student);
+//        System.out.print(student);
         return studentRepository.save(student);
     }
 

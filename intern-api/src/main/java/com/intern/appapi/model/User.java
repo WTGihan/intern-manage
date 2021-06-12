@@ -22,6 +22,10 @@ public class User implements Serializable {
     @JoinColumn
     private Student student;
 
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @JoinColumn
+    private Company company;
+
     public User() {
 
     }
