@@ -20,7 +20,7 @@ public class Student implements Serializable {
     private String studentName;
 
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "user_id", unique = true)
     private User user;
 
