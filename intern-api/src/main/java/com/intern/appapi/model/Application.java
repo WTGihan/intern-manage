@@ -13,12 +13,12 @@ public class Application {
     private String companyAcception;
 
 //    companyId
-    @OneToOne(cascade = CascadeType.REMOVE)
+    @OneToOne()
     @JoinColumn(name="comapny_id", unique = true)
     private Company company;
 
 //    studentId
-    @OneToOne(cascade = CascadeType.REMOVE)
+    @OneToOne()
     @JoinColumn(name = "student_id", unique = true)
     private Student student;
 
