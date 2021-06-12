@@ -68,7 +68,7 @@ public class StudentController {
 //    delete student
     @DeleteMapping("/students/{id}")
     public ResponseEntity<Map<String, Boolean>> deleteUser(@PathVariable Long id) {
-        Student student = studentRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("User not exist id:"+id));
+        Student student = studentRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("Student not exist id:"+id));
         studentRepository.delete(student);
         Map<String, Boolean> response = new HashMap<>();
         response.put("Deleted", Boolean.TRUE);
