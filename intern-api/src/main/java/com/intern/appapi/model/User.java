@@ -2,10 +2,11 @@ package com.intern.appapi.model;
 
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name="user")
-public class User {
+public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -16,6 +17,9 @@ public class User {
     private String email;
     @Column(name = "password")
     private String password;
+
+    @OneToOne(mappedBy = "email")
+    private Student student;
 
     public User() {
 

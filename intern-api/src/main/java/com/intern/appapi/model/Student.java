@@ -1,30 +1,43 @@
 package com.intern.appapi.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name="student")
-public class Student {
+public class Student implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(name="username")
     private String username;
+
     @Column(name="adminAcception")
     private String adminAcception;
+
     @Column(name="studentName")
     private String studentName;
-    @Column(name="email")
-    private String email;
+
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "email", referencedColumnName = "email")
+    private User email;
+
     @Column(name="contactnumber", length = 10)
     private String contactnumber;
+
+
+
     @Column(name="university")
     private String university;
+
     @Column(name="languageSkill")
     private String languageSkill;
+
     @Column(name="softSkill")
     private String softSkill;
+
     @Column(name="projects")
     private String projects;
 
@@ -36,7 +49,7 @@ public class Student {
         this.username = username;
         this.adminAcception = adminAcception;
         this.studentName = studentName;
-        this.email = email;
+//        this.email = email;
         this.contactnumber = contactnumber;
         this.university = university;
         this.languageSkill = languageSkill;
@@ -77,10 +90,10 @@ public class Student {
     }
 
     public String getEmail() {
-        return email;
+        return email.getEmail();
     }
 
-    public void setEmail(String email) {
+    public void setEmail(User email) {
         this.email = email;
     }
 
