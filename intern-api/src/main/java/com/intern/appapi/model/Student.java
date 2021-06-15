@@ -42,9 +42,9 @@ public class Student{
     @Column(name="projects")
     private String projects;
 
-//    @OneToOne(mappedBy = "student", cascade = CascadeType.REMOVE)
-//    @JoinColumn
-//    private Application application;
+    @OneToOne(mappedBy = "student", cascade = CascadeType.REMOVE)
+    @JoinColumn
+    private Application application;
 
     public Student() {
 

@@ -18,13 +18,17 @@ public class User{
     @Column(name = "password")
     private String password;
 
-//    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-//    @JoinColumn
-//    private Student student;
-//
-//    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-//    @JoinColumn
-//    private Company company;
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @JoinColumn
+    private Student student;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @JoinColumn
+    private Company company;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @JoinColumn
+    private CampusAdmin campusAdmin;
 
     public User() {
 
