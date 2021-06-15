@@ -39,108 +39,73 @@ function StudentProfile({ loginUser }) {
   const { id } = useParams();
 
   useEffect(() => {
-    const loadStudents = async () => {
-      if (id === undefined) {
-        const loginUseremail = loginUser.email;
-        const usersResult = await getUsers();
-        const users = usersResult.data;
-        const getUser = users.filter((user) => user.email === loginUseremail);
-        const user = getUser[0];
-
-        if (user) {
-          const userid = user.id;
-          const result = await getStudents();
-          const students = result.data;
-          var newresult = students.filter((data) => data.user.id === userid);
-
-          var studentDetails = newresult[0];
-          console.log(studentDetails);
-          setStudent(studentDetails);
-        }
-      } else {
-        // const result = await axios.get(`http://localhost:3004/students/${id}`);
-        const result = await getStudentDetails(id);
-        setStudent(result.data);
-        if (userType === "Company" && viewType === "viewonly") {
-          // const applications = await axios.get(
-          //   "http://localhost:3004/application"
-          // );
-          const applications = await getApplications();
-          const applicationResult = applications.data;
-
-          // Get company id from
-          const loginUseremail = loginUser.email;
-          // const allCompanies = await axios.get(
-          //   "http://localhost:3004/companies"
-          // );
-          const allCompanies = await getCompanies();
-          const allCompaniesResult = allCompanies.data;
-          let companyId = 0;
-          allCompaniesResult.forEach((data) => {
-            if (data.useremail === loginUseremail) {
-              companyId = data.id;
-            }
-          });
-
-          let newid = parseInt(id);
-          let applicationId;
-          applicationResult.forEach((data) => {
-            if (data.studentId === newid && data.companyId === companyId) {
-              applicationId = data.id;
-            }
-          });
-
-          // console.log(applicationId);
-
-          // const result = await axios.get(
-          //   `http://localhost:3004/application/${applicationId}`
-          // );
-          const result = await getApplicationDetails(id);
-          let application = result.data;
-          setApplicationStatus(application.companyAcception);
-        }
-      }
-    };
     loadStudents();
   }, [loginUser]);
 
-  const deleteStudentProfile = async (id) => {
-    const loginUseremail = loginUser.email;
-    // check student has company applications
-    // const applications = await axios.get("http://localhost:3004/application");
-    const applications = await getApplications();
-    const applicationResult = applications.data;
-    let newid = parseInt(id);
-    let applicationArray = [];
-    let i = 0;
-    applicationResult.forEach((data) => {
-      if (data.studentId === newid) {
-        applicationArray[i] = data.id;
-        i++;
+  const loadStudents = async () => {
+    if (id === undefined) {
+      const loginUseremail = loginUser.email;
+      const usersResult = await getUsers();
+      const users = usersResult.data;
+      const getUser = users.filter((user) => user.email === loginUseremail);
+      const user = getUser[0];
+
+      if (user) {
+        const userid = user.id;
+        const result = await getStudents();
+        const students = result.data;
+        var newresult = students.filter((data) => data.user.id === userid);
+
+        var studentDetails = newresult[0];
+        setStudent(studentDetails);
       }
-    });
+    } else {
+      // const result = await axios.get(`http://localhost:3004/students/${id}`);
+      const result = await getStudentDetails(id);
+      setStudent(result.data);
+      if (userType === "Company" && viewType === "viewonly") {
+        // const applications = await axios.get(
+        //   "http://localhost:3004/application"
+        // );
+        const applications = await getApplications();
+        const applicationResult = applications.data;
 
-    for (let j = 0; j < applicationArray.length; j++) {
-      // await axios.delete(
-      //   `http://localhost:3004/application/${applicationArray[j]}`
-      // );
-      await deleteApplication(applicationArray[j]);
+        // Get company id from
+        const loginUseremail = loginUser.email;
+        // const allCompanies = await axios.get(
+        //   "http://localhost:3004/companies"
+        // );
+        const allCompanies = await getCompanies();
+        const allCompaniesResult = allCompanies.data;
+        let companyId = 0;
+        allCompaniesResult.forEach((data) => {
+          if (data.useremail === loginUseremail) {
+            companyId = data.id;
+          }
+        });
+
+        let newid = parseInt(id);
+        let applicationId;
+        applicationResult.forEach((data) => {
+          if (data.studentId === newid && data.companyId === companyId) {
+            applicationId = data.id;
+          }
+        });
+
+        // console.log(applicationId);
+
+        // const result = await axios.get(
+        //   `http://localhost:3004/application/${applicationId}`
+        // );
+        const result = await getApplicationDetails(id);
+        let application = result.data;
+        setApplicationStatus(application.companyAcception);
+      }
     }
+  };
 
-    // await axios.delete(`http://localhost:3004/students/${id}`);
-    // await deleteStudent(id);
+  const deleteStudentProfile = async (id) => {
     await deleteStudent(id);
-    // const result = await axios.get("http://localhost:3004/users");
-    const result = await getUsers();
-    const users = result.data;
-    const newresult = users.filter((data) => data.email === loginUseremail);
-    let userid = "";
-    newresult.forEach((data) => {
-      userid = data.id;
-    });
-    // await axios.delete(`http://localhost:3004/users/${userid}`);
-    await getUserDetails(id);
-
     localStorage.removeItem("loginUser");
     window.location = "/";
   };
@@ -277,17 +242,6 @@ function StudentProfile({ loginUser }) {
                 type="text"
                 className="form-control"
                 value={student.studentName}
-                readOnly
-              />
-            </div>
-          </div>
-          <div className="form-group row">
-            <label className="col-sm-4 col-form-label">Email</label>
-            <div className="col-sm-8">
-              <input
-                type="text"
-                className="form-control"
-                value={student.email}
                 readOnly
               />
             </div>

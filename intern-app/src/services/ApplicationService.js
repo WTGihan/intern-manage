@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const apiApplicationUrl = "http://localhost:8080/api/intern/application";
+const apiApplicationUrl = "http://localhost:8080/api/intern/applications";
 
 export function getApplications() {
   return axios.get(apiApplicationUrl);
