@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const apiStudentUrl = "http://localhost:3004/students";
+const apiStudentUrl = "http://localhost:8080/api/intern/students";
 
 export function getStudents() {
   return axios.get(apiStudentUrl);

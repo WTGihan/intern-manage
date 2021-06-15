@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const apiCompanyUrl = "http://localhost:3004/companies";
+const apiCompanyUrl = "http://localhost:8080/api/intern/companies";
 
 export function getCompanies() {
   return axios.get(apiCompanyUrl);
