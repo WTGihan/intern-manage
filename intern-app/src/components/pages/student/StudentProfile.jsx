@@ -64,54 +64,35 @@ function StudentProfile({ loginUser }) {
         console.log("Error", err.message);
       }
     } else {
-      // const result = await axios.get(`http://localhost:3004/students/${id}`);
-      const result = await getStudentDetails(id);
-      setStudent(result.data);
-      if (userType === "Company" && viewType === "viewonly") {
-        // const applications = await axios.get(
-        //   "http://localhost:3004/application"
-        // );
-        const applications = await getApplications();
-        const applicationResult = applications.data;
+      try {
+        const result = await getStudentDetails(id);
+        setStudent(result.data);
+        if (userType === "Company" && viewType === "viewonly") {
+          const applications = await getApplications();
+          const applicationStudentAndCompany = applications.data.filter(
+            (data) =>
+              data.company.user.email === loginUser.email &&
+              data.student.id === parseInt(id)
+          );
 
-        // Get company id from
-        const loginUseremail = loginUser.email;
-        // const allCompanies = await axios.get(
-        //   "http://localhost:3004/companies"
-        // );
-        const allCompanies = await getCompanies();
-        const allCompaniesResult = allCompanies.data;
-        let companyId = 0;
-        allCompaniesResult.forEach((data) => {
-          if (data.useremail === loginUseremail) {
-            companyId = data.id;
-          }
-        });
-
-        let newid = parseInt(id);
-        let applicationId;
-        applicationResult.forEach((data) => {
-          if (data.studentId === newid && data.companyId === companyId) {
-            applicationId = data.id;
-          }
-        });
-
-        // console.log(applicationId);
-
-        // const result = await axios.get(
-        //   `http://localhost:3004/application/${applicationId}`
-        // );
-        const result = await getApplicationDetails(id);
-        let application = result.data;
-        setApplicationStatus(application.companyAcception);
+          setApplicationStatus(
+            applicationStudentAndCompany[0].companyAcception
+          );
+        }
+      } catch (err) {
+        console.log("Error", err.message);
       }
     }
   };
 
   const deleteStudentProfile = async (id) => {
-    await deleteStudent(id);
-    localStorage.removeItem("loginUser");
-    window.location = "/";
+    try {
+      await deleteStudent(id);
+      localStorage.removeItem("loginUser");
+      window.location = "/";
+    } catch (err) {
+      console.log("Error", err.message);
+    }
   };
 
   const acceptStudent = async (id) => {

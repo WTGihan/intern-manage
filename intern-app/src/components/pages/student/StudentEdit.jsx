@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { useHistory, useParams } from "react-router-dom";
 import {
   getStudentDetails,
@@ -42,9 +41,13 @@ function StudentEdit() {
   };
 
   const onSubmit = async (e) => {
-    e.preventDefault();
-    await editStudentDetails(id, student);
-    history.push("/student-profile");
+    try {
+      e.preventDefault();
+      await editStudentDetails(id, student);
+      history.push("/student-profile");
+    } catch (err) {
+      console.log("Error", err.message);
+    }
   };
 
   return (

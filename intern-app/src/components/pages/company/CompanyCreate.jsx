@@ -32,19 +32,23 @@ function CompanyCreate() {
       userType: result.userType,
     };
 
-    // get user object
-    const usersResult = await getUsers();
-    const users = usersResult.data;
-    const getUser = users.filter((user) => user.email === loginUser.email);
-    const user = getUser[0];
+    try {
+      // get user object
+      const usersResult = await getUsers();
+      const users = usersResult.data;
+      const getUser = users.filter((user) => user.email === loginUser.email);
+      const user = getUser[0];
 
-    var currentCompany = company;
+      var currentCompany = company;
 
-    const newCompany = { ...currentCompany, user };
-    await addNewCompany(newCompany);
+      const newCompany = { ...currentCompany, user };
+      await addNewCompany(newCompany);
 
-    localStorage.setItem("loginUser", JSON.stringify(loginUser));
-    window.location = "/";
+      localStorage.setItem("loginUser", JSON.stringify(loginUser));
+      window.location = "/";
+    } catch (err) {
+      console.log("Error", err.message);
+    }
   };
 
   return (

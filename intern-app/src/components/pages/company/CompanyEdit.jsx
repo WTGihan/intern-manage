@@ -1,158 +1,165 @@
-import React, {useState, useEffect} from "react";
-import {useHistory, useParams} from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useHistory, useParams } from "react-router-dom";
 import {
-    editCompanyDetails,
-    getCompanyDetails,
+  editCompanyDetails,
+  getCompanyDetails,
 } from "./../../../services/CompanyService";
 
 function CompanyEdit() {
-    let history = useHistory();
-    const {id} = useParams();
+  let history = useHistory();
+  const { id } = useParams();
 
-    const [company, setCompany] = useState({
-        username: "",
-        adminAcception: "",
-        companyAdminName: "",
-        email: "",
-        contactnumber: "",
-        company: "",
-        technologies: "",
-        qualificationAndExperience: "",
-        aboutCompany: "",
-    });
+  const [company, setCompany] = useState({
+    username: "",
+    adminAcception: "",
+    companyAdminName: "",
+    email: "",
+    contactnumber: "",
+    company: "",
+    technologies: "",
+    qualificationAndExperience: "",
+    aboutCompany: "",
+  });
 
-    useEffect(() => {
-        const loadCompany = async () => {
-            // const result = await axios.get(`http://localhost:3004/companies/${id}`);
-            const result = await getCompanyDetails(id);
-            setCompany(result.data);
-        };
-        loadCompany();
-    }, []);
+  useEffect(() => {
+    loadCompany();
+  },[]);
 
-    const onInputChange = (e) => {
-        setCompany({...company, [e.target.name]: e.target.value});
-    };
+  const loadCompany = async () => {
+    try {
+      const result = await getCompanyDetails(id);
+      setCompany(result.data);
+    } catch (err) {
+      console.log("Error", err.message);
+    }
+  };
 
-    const onSubmit = async (e) => {
-        e.preventDefault();
-        // await axios.put(`http://localhost:3004/companies/${id}`, company);
-        await editCompanyDetails(company);
-        history.push("/company-profile");
-    };
+  const onInputChange = (e) => {
+    setCompany({ ...company, [e.target.name]: e.target.value });
+  };
 
-    return (
-        <div className="container  w-50 m-auto">
-            <div className="py-4">
-                <h1 className="text-center setmargin">Company Edit Profile</h1>
-                <form className="mx-auto" onSubmit={(e) => onSubmit(e)}>
-                    <div className="form-group row">
-                        <label className="col-sm-4 col-form-label">Username</label>
-                        <div className="col-sm-8">
-                            <input
-                                type="text"
-                                className="form-control"
-                                name="username"
-                                value={company.username}
-                                onChange={(e) => onInputChange(e)}
-                            />
-                        </div>
-                    </div>
-                    <div className="form-group row">
-                        <label className="col-sm-4 col-form-label">
-                            Company Admin Name
-                        </label>
-                        <div className="col-sm-8">
-                            <input
-                                type="text"
-                                className="form-control"
-                                name="companyAdminName"
-                                value={company.companyAdminName}
-                                onChange={(e) => onInputChange(e)}
-                            />
-                        </div>
-                    </div>
-                    <div className="form-group row">
-                        <label className="col-sm-4 col-form-label">Comapany Email</label>
-                        <div className="col-sm-8">
-                            <input
-                                type="text"
-                                className="form-control"
-                                name="email"
-                                value={company.email}
-                                onChange={(e) => onInputChange(e)}
-                            />
-                        </div>
-                    </div>
-                    <div className="form-group row">
-                        <label className="col-sm-4 col-form-label">
-                            Companay Contact Number
-                        </label>
-                        <div className="col-sm-8">
-                            <input
-                                type="text"
-                                className="form-control"
-                                name="contactnumber"
-                                value={company.contactnumber}
-                                onChange={(e) => onInputChange(e)}
-                            />
-                        </div>
-                    </div>
-                    <div className="form-group row">
-                        <label className="col-sm-4 col-form-label">Company</label>
-                        <div className="col-sm-8">
-                            <input
-                                type="text"
-                                className="form-control"
-                                name="company"
-                                value={company.company}
-                                onChange={(e) => onInputChange(e)}
-                            />
-                        </div>
-                    </div>
-                    <div className="form-group row">
-                        <label className="col-sm-4 col-form-label">Technologies</label>
-                        <div className="col-sm-8">
-              <textarea
-                  className="form-control"
-                  name="technologies"
-                  value={company.technologies}
-                  onChange={(e) => onInputChange(e)}
+  const onSubmit = async (e) => {
+    try {
+      e.preventDefault();
+      await editCompanyDetails(id, company);
+      history.push("/company-profile");
+    } catch (err) {
+      console.log("Error", err.message);
+    }
+  };
+
+  return (
+    <div className="container  w-50 m-auto">
+      <div className="py-4">
+        <h1 className="text-center setmargin">Company Edit Profile</h1>
+        <form className="mx-auto" onSubmit={(e) => onSubmit(e)}>
+          <div className="form-group row">
+            <label className="col-sm-4 col-form-label">Username</label>
+            <div className="col-sm-8">
+              <input
+                type="text"
+                className="form-control"
+                name="username"
+                value={company.username}
+                onChange={(e) => onInputChange(e)}
               />
-                        </div>
-                    </div>
-                    <div className="form-group row">
-                        <label className="col-sm-4 col-form-label">
-                            Qualification and Experience
-                        </label>
-                        <div className="col-sm-8">
-              <textarea
-                  className="form-control"
-                  name="qualificationAndExperience"
-                  value={company.qualificationAndExperience}
-                  onChange={(e) => onInputChange(e)}
-              />
-                        </div>
-                    </div>
-                    <div className="form-group row">
-                        <label className="col-sm-4 col-form-label">About Company</label>
-                        <div className="col-sm-8">
-              <textarea
-                  className="form-control"
-                  name="aboutCompany"
-                  value={company.aboutCompany}
-                  onChange={(e) => onInputChange(e)}
-              />
-                        </div>
-                    </div>
-
-                    <div className="btn-group mr-2">
-                        <button className="btn btn-primary">Edit Profile</button>
-                    </div>
-                </form>
             </div>
-        </div>
-    );
+          </div>
+          <div className="form-group row">
+            <label className="col-sm-4 col-form-label">
+              Company Admin Name
+            </label>
+            <div className="col-sm-8">
+              <input
+                type="text"
+                className="form-control"
+                name="companyAdminName"
+                value={company.companyAdminName}
+                onChange={(e) => onInputChange(e)}
+              />
+            </div>
+          </div>
+          <div className="form-group row">
+            <label className="col-sm-4 col-form-label">Comapany Email</label>
+            <div className="col-sm-8">
+              <input
+                type="text"
+                className="form-control"
+                name="email"
+                value={company.email}
+                onChange={(e) => onInputChange(e)}
+              />
+            </div>
+          </div>
+          <div className="form-group row">
+            <label className="col-sm-4 col-form-label">
+              Companay Contact Number
+            </label>
+            <div className="col-sm-8">
+              <input
+                type="text"
+                className="form-control"
+                name="contactnumber"
+                value={company.contactnumber}
+                onChange={(e) => onInputChange(e)}
+              />
+            </div>
+          </div>
+          <div className="form-group row">
+            <label className="col-sm-4 col-form-label">Company</label>
+            <div className="col-sm-8">
+              <input
+                type="text"
+                className="form-control"
+                name="company"
+                value={company.company}
+                onChange={(e) => onInputChange(e)}
+              />
+            </div>
+          </div>
+          <div className="form-group row">
+            <label className="col-sm-4 col-form-label">Technologies</label>
+            <div className="col-sm-8">
+              <textarea
+                className="form-control"
+                name="technologies"
+                value={company.technologies}
+                onChange={(e) => onInputChange(e)}
+              />
+            </div>
+          </div>
+          <div className="form-group row">
+            <label className="col-sm-4 col-form-label">
+              Qualification and Experience
+            </label>
+            <div className="col-sm-8">
+              <textarea
+                className="form-control"
+                name="qualificationAndExperience"
+                value={company.qualificationAndExperience}
+                onChange={(e) => onInputChange(e)}
+              />
+            </div>
+          </div>
+          <div className="form-group row">
+            <label className="col-sm-4 col-form-label">About Company</label>
+            <div className="col-sm-8">
+              <textarea
+                className="form-control"
+                name="aboutCompany"
+                value={company.aboutCompany}
+                onChange={(e) => onInputChange(e)}
+              />
+            </div>
+          </div>
+
+          <div className="btn-group mr-2">
+            <button className="btn btn-primary">Edit Profile</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
 }
 
 export default CompanyEdit;

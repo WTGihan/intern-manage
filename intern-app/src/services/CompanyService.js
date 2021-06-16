@@ -17,3 +17,7 @@ export function getCompanyDetails(id) {
 export function editCompanyDetails(id, company) {
   return axios.put(apiCompanyUrl + "/" + id, company);
 }
+
+export function deleteCompany(id) {
+  return axios.delete(apiCompanyUrl + "/" + id);
+}

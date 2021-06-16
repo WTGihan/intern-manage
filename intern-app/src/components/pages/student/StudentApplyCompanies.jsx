@@ -37,10 +37,8 @@ function StudentApplyCompanies() {
       let companies = [];
 
       for (var key in filterApplications) {
-        let companyResult = await getCompanyDetails(
-          filterApplications[key].company.id
-        );
-        let company = companyResult.data;
+        let company = filterApplications[key]["company"];
+
         let companyApplicationDetails = {};
         companyApplicationDetails.companyName = company.company;
         companyApplicationDetails.companyEmail = company.email;
@@ -48,7 +46,6 @@ function StudentApplyCompanies() {
         companyApplicationDetails.companyContactNumber = company.contactnumber;
         companyApplicationDetails.companyApplicationStatus =
           filterApplications[key]["companyAcception"];
-
         companies.push(companyApplicationDetails);
       }
 
