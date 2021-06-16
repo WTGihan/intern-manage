@@ -8,7 +8,11 @@ function StudentApplyCompanies() {
   let loginUser = JSON.parse(localStorage.getItem("loginUser"));
 
   useEffect(() => {
-    const loadApplyCompanies = async () => {
+    loadApplyCompanies();
+  }, []);
+
+  const loadApplyCompanies = async () => {
+    try {
       const loginUserEmail = loginUser.email;
       const result = await getStudents();
       const students = result.data;
@@ -49,9 +53,10 @@ function StudentApplyCompanies() {
       }
 
       setApplyCompanies(companies);
-    };
-    loadApplyCompanies();
-  }, []);
+    } catch (err) {
+      console.log("Error", err.message);
+    }
+  };
 
   return (
     <div className="container">

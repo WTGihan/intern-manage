@@ -10,10 +10,14 @@ function StudentHome() {
   }, []);
 
   const loadCompaies = async () => {
-    const result = await getCompanies();
-    setCompany(
-      result.data.filter((company) => company.adminAcception === "Accepted")
-    );
+    try {
+      const result = await getCompanies();
+      setCompany(
+        result.data.filter((company) => company.adminAcception === "Accepted")
+      );
+    } catch (err) {
+      console.log("Error", err.message);
+    }
   };
 
   return (

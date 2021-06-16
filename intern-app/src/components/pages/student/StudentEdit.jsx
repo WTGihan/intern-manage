@@ -27,9 +27,12 @@ function StudentEdit() {
 
   useEffect(() => {
     const loadStudent = async () => {
-      // const result = await axios.get(`http://localhost:3004/students/${id}`);
-      const result = await getStudentDetails(id);
-      setStudent(result.data);
+      try {
+        const result = await getStudentDetails(id);
+        setStudent(result.data);
+      } catch (err) {
+        console.log("Error", err.message);
+      }
     };
     loadStudent();
   }, []);

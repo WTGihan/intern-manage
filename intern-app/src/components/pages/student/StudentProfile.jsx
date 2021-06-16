@@ -44,20 +44,24 @@ function StudentProfile({ loginUser }) {
 
   const loadStudents = async () => {
     if (id === undefined) {
-      const loginUseremail = loginUser.email;
-      const usersResult = await getUsers();
-      const users = usersResult.data;
-      const getUser = users.filter((user) => user.email === loginUseremail);
-      const user = getUser[0];
+      try {
+        const loginUseremail = loginUser.email;
+        const usersResult = await getUsers();
+        const users = usersResult.data;
+        const getUser = users.filter((user) => user.email === loginUseremail);
+        const user = getUser[0];
 
-      if (user) {
-        const userid = user.id;
-        const result = await getStudents();
-        const students = result.data;
-        var newresult = students.filter((data) => data.user.id === userid);
+        if (user) {
+          const userid = user.id;
+          const result = await getStudents();
+          const students = result.data;
+          var newresult = students.filter((data) => data.user.id === userid);
 
-        var studentDetails = newresult[0];
-        setStudent(studentDetails);
+          var studentDetails = newresult[0];
+          setStudent(studentDetails);
+        }
+      } catch (err) {
+        console.log("Error", err.message);
       }
     } else {
       // const result = await axios.get(`http://localhost:3004/students/${id}`);
