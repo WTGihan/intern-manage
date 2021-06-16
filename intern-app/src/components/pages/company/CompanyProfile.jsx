@@ -52,8 +52,6 @@ function CompanyProfile({ loginUser }) {
     let studentId = "";
     if (id === undefined) {
       const loginUseremail = loginUser.email;
-      // const result = await axios.get("http://localhost:3004/companies");
-
       try {
         const usersResult = await getUsers();
         const users = usersResult.data;
@@ -104,9 +102,12 @@ function CompanyProfile({ loginUser }) {
       });
     }
     if (id !== undefined) {
-      // const result = await axios.get(`http://localhost:3004/companies/${id}`);
-      const result = await getCompanyDetails(id);
-      setCompany(result.data);
+      try {
+        const result = await getCompanyDetails(id);
+        setCompany(result.data);
+      } catch (err) {
+        console.log("Error", err.message);
+      }
     }
   };
 
