@@ -1,6 +1,6 @@
 # Intern Mangement Programme System
 
-This project was developed with React and Spring Boot
+This project was developed with #`React` and #`Spring Boot`
 
 ## User Roles and Functionalites
 
