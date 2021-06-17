@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { getStudents } from "./../../../services/StudentService";
-import { getApplications } from "./../../../services/ApplicationService";
-import { getCompanyDetails } from "./../../../services/CompanyService";
+import {
+  deleteApplication,
+  getApplications,
+} from "./../../../services/ApplicationService";
 
 function StudentApplyCompanies() {
   const [applyCompanies, setApplyCompanies] = useState({});
@@ -32,8 +35,6 @@ function StudentApplyCompanies() {
         (data) => data.student.id === studentID
       );
 
-      //   have to modify
-
       let companies = [];
 
       for (var key in filterApplications) {
@@ -46,10 +47,21 @@ function StudentApplyCompanies() {
         companyApplicationDetails.companyContactNumber = company.contactnumber;
         companyApplicationDetails.companyApplicationStatus =
           filterApplications[key]["companyAcception"];
+        companyApplicationDetails.companyApplicationid =
+          filterApplications[key]["id"];
         companies.push(companyApplicationDetails);
       }
 
       setApplyCompanies(companies);
+    } catch (err) {
+      console.log("Error", err.message);
+    }
+  };
+
+  const deleteStudentCompanyApplication = async (id) => {
+    try {
+      await deleteApplication(id);
+      window.location = "/";
     } catch (err) {
       console.log("Error", err.message);
     }
@@ -68,6 +80,7 @@ function StudentApplyCompanies() {
               <th scope="col">Email</th>
               <th scope="col">Contact Number</th>
               <th scope="col">Status</th>
+              <th scope="col">Action</th>
             </tr>
           </thead>
           <tbody>
@@ -82,20 +95,35 @@ function StudentApplyCompanies() {
                     <td>{company.companyContactNumber}</td>
                     <td>
                       {company.companyApplicationStatus === "Rejected" && (
-                        <div className="btn btn-danger">
+                        <div className="btn btn-danger disabled">
                           {company.companyApplicationStatus}
                         </div>
                       )}
                       {company.companyApplicationStatus === "NotAccepted" && (
-                        <div className="btn btn-primary">
+                        <div className="btn btn-primary disabled">
                           {company.companyApplicationStatus}
                         </div>
                       )}
                       {company.companyApplicationStatus === "Accepted" && (
-                        <div className="btn btn-success">
+                        <div className="btn btn-success disabled">
                           {company.companyApplicationStatus}
                         </div>
                       )}
+                    </td>
+                    <td>
+                      <div className="btn-group mr-2">
+                        <Link
+                          className="btn btn-danger"
+                          to="/"
+                          onClick={() =>
+                            deleteStudentCompanyApplication(
+                              company.companyApplicationid
+                            )
+                          }
+                        >
+                          Delete
+                        </Link>
+                      </div>
                     </td>
                   </tr>
                 ))}

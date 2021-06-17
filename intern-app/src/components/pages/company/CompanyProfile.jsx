@@ -5,7 +5,10 @@ import {
   getCompanies,
   getCompanyDetails,
 } from "./../../../services/CompanyService";
-import { getStudents } from "./../../../services/StudentService";
+import {
+  getStudents,
+  getStudentDetails,
+} from "./../../../services/StudentService";
 import { deleteUser, getUsers } from "./../../../services/UserService";
 import {
   getApplications,
@@ -37,11 +40,7 @@ function CompanyProfile({ loginUser }) {
     adminAcception: "",
   });
 
-  const [application, setApplication] = useState({
-    id: "",
-    companyId: "",
-    studentId: "",
-  });
+  const [application, setApplication] = useState({});
 
   const { id } = useParams();
   useEffect(() => {
@@ -49,7 +48,6 @@ function CompanyProfile({ loginUser }) {
   }, [loginUser]);
 
   const loadCompany = async () => {
-    let studentId = "";
     if (id === undefined) {
       const loginUseremail = loginUser.email;
       try {
@@ -72,34 +70,31 @@ function CompanyProfile({ loginUser }) {
       }
     }
     if (userType === "Student") {
-      const loginUserEmail = loginUser.email;
-      // const result = await axios.get("http://localhost:3004/students");
-      const result = await getStudents();
-      const students = result.data;
-      const newstudent = students.filter(
-        (data) => data.email === loginUserEmail
-      );
-      // console.log(newstudent[id]);
-
-      newstudent.forEach((data) => {
-        studentId = data.id;
-        setStudent(data);
-      });
+      try {
+        const loginUserEmail = loginUser.email;
+        const result = await getStudents();
+        const newstudent = result.data.filter(
+          (data) => data.user.email === loginUserEmail
+        );
+        setStudent(newstudent[0]);
+      } catch (ex) {
+        console.log("Error:", ex.message);
+      }
     }
     if (id !== undefined && userType === "Student") {
-      // id is equal to company id
-      // console.log(id);
-      // console.log(studentId);
-      // get all application details
-      // const applications = await axios.get("http://localhost:3004/application");
-      const applications = await getApplications();
-      const applicationsResult = applications.data;
-      applicationsResult.forEach((data) => {
-        if (data.companyId == id && data.studentId == studentId) {
-          // SET APPLICATIONS DATA
-          setApplication(data);
+      try {
+        const applications = await getApplications();
+        const application = applications.data.filter(
+          (data) =>
+            data.company.id === parseInt(id) &&
+            data.student.user.email === loginUser.email
+        );
+        if (application) {
+          setApplication(application[0]);
         }
-      });
+      } catch (ex) {
+        console.log("Error", ex.message);
+      }
     }
     if (id !== undefined) {
       try {
@@ -111,7 +106,6 @@ function CompanyProfile({ loginUser }) {
     }
   };
 
-  //   Complete
   const deleteCompany = async (id) => {
     try {
       await deleteCompany(id);
@@ -148,15 +142,19 @@ function CompanyProfile({ loginUser }) {
 
   const applyForCompany = async (id) => {
     let newapplication = {};
-    newapplication.companyId = parseInt(id);
-    newapplication.studentId = student.id;
-    // console.log(newapplication);
-    // await axios.post("http://localhost:3004/application", newapplication);
-    await addNewApplication(newapplication);
-    window.location = "/";
-  };
+    try {
+      const companyDetials = await getCompanyDetails(parseInt(id));
+      const studentDetails = await getStudentDetails(student.id);
+      newapplication.company = companyDetials.data;
+      newapplication.student = studentDetails.data;
+      newapplication.companyAcception = "NotAccepted";
 
-  // console.log(application);
+      await addNewApplication(newapplication);
+      window.location = "/";
+    } catch (ex) {
+      console.log("Error:", ex.message);
+    }
+  };
 
   return (
     <div className="container  w-50 m-auto">
@@ -271,7 +269,7 @@ function CompanyProfile({ loginUser }) {
           {id &&
             userType === "Student" &&
             student.adminAcception === "Accepted" &&
-            !application.id && (
+            !application && (
               <React.Fragment>
                 <div className="btn-group mr-2">
                   <Link
