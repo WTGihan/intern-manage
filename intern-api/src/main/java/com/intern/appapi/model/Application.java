@@ -12,15 +12,14 @@ public class Application {
     @Column(name="companyAcception")
     private String companyAcception;
 
-//    companyId
-    @OneToOne()
-    @JoinColumn(name="comapny_id")
-    private Company company;
 
-//    studentId
-    @OneToOne()
-    @JoinColumn(name = "student_id")
+    @ManyToOne
+    @JoinColumn(name="student_id", nullable=false)
     private Student student;
+
+    @ManyToOne
+    @JoinColumn(name="company_id", nullable=false)
+    private Company company;
 
     public  Application() {
 

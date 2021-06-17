@@ -32,7 +32,6 @@ function StudentCreate() {
       userType: result.userType,
     };
 
-    // get user object
     try {
       const usersResult = await getUsers();
       const users = usersResult.data;

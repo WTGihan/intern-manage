@@ -2,7 +2,6 @@ package com.intern.appapi.model;
 
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Entity
 @Table(name="user")
@@ -18,15 +17,15 @@ public class User{
     @Column(name = "password")
     private String password;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "user", cascade = CascadeType.PERSIST)
     @JoinColumn
     private Student student;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "user", cascade = CascadeType.PERSIST)
     @JoinColumn
     private Company company;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "user", cascade = CascadeType.PERSIST)
     @JoinColumn
     private CampusAdmin campusAdmin;
 

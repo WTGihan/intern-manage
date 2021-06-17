@@ -1,6 +1,7 @@
 package com.intern.appapi.model;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name="student")
@@ -41,9 +42,9 @@ public class Student{
     @Column(name="projects")
     private String projects;
 
-    @OneToOne(mappedBy = "student", cascade = CascadeType.REMOVE)
-    @JoinColumn
-    private Application application;
+
+    @OneToMany(mappedBy="student",cascade = CascadeType.REMOVE)
+    private Set<Application> application;
 
     public Student() {
 

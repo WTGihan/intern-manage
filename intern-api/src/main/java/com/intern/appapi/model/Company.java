@@ -1,6 +1,7 @@
 package com.intern.appapi.model;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name="company")
@@ -35,9 +36,9 @@ public class Company {
     @Column(name="aboutCompany")
     private String aboutCompany;
 
-    @OneToOne(mappedBy = "company", cascade = CascadeType.REMOVE)
-    @JoinColumn
-    private Application application;
+
+    @OneToMany(mappedBy="company",cascade = CascadeType.REMOVE)
+    private Set<Application> application;
 
 
     public Company() {

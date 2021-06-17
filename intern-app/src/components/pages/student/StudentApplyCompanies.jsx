@@ -28,7 +28,6 @@ function StudentApplyCompanies() {
         studentID = data.id;
       });
 
-      // Then get all aplications data for given student id
       const resultApplication = await getApplications();
       const applications = resultApplication.data;
       const filterApplications = applications.filter(

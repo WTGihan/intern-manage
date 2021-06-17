@@ -35,6 +35,11 @@ function Navbar({ loginUser }) {
                         Apply Companies
                       </NavLink>
                     </li>
+                    <li className="nav-item">
+                      <NavLink className="nav-link" exact to="/user">
+                        User Account
+                      </NavLink>
+                    </li>
                   </React.Fragment>
                 )}
                 {userType === "Company" && (
@@ -47,6 +52,11 @@ function Navbar({ loginUser }) {
                     <li className="nav-item">
                       <NavLink className="nav-link" exact to="/select-students">
                         Select Students
+                      </NavLink>
+                    </li>
+                    <li className="nav-item">
+                      <NavLink className="nav-link" exact to="/user">
+                        User Account
                       </NavLink>
                     </li>
                   </React.Fragment>
@@ -76,6 +86,11 @@ function Navbar({ loginUser }) {
                         Admin Profile
                       </NavLink>
                     </li>
+                    <li className="nav-item">
+                      <NavLink className="nav-link" exact to="/user">
+                        User Account
+                      </NavLink>
+                    </li>
                   </React.Fragment>
                 )}
                 {(userType === "" || typeof userType === undefined) && (
@@ -96,11 +111,6 @@ function Navbar({ loginUser }) {
                 <li className="nav-item">
                   <NavLink className="nav-link" exact to="/about">
                     About
-                  </NavLink>
-                </li>
-                <li className="nav-item">
-                  <NavLink className="nav-link" exact to="/user">
-                    User Account
                   </NavLink>
                 </li>
               </ul>

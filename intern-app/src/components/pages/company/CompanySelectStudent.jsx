@@ -14,10 +14,7 @@ function CompanySelectStudent() {
     try {
       const loginUserEmail = loginUser.email;
 
-      //   get company details
-      // get company id
       const result = await getCompanies();
-      // console.log(result.data);
       const company = result.data.filter(
         (data) => data.user.email === loginUserEmail
       );

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import passwordHash from "password-hash";
 import { addNewUser } from "../../../services/UserService";
-import StudentEdit from "./../student/StudentEdit";
 
 function SignUp() {
   const [newuser, createUser] = useState({
@@ -22,20 +21,27 @@ function SignUp() {
     result = { ...newuser };
     result["password"] = passwordHash.generate(result["password"]);
 
-    const loginUser = {
-      email: result.email,
-      userType: result.userType,
-      status: "new",
-    };
-
     try {
-      await addNewUser(result);
-      localStorage.setItem("loginUser", JSON.stringify(loginUser));
-      if (result.userType === "Student") {
-        window.location = "/student-create";
-      }
-      if (result.userType === "Company") {
-        window.location = "/company-create";
+      const statusResult = await addNewUser(result);
+      if (statusResult.status === 200) {
+        const loginUser = {
+          email: result.email,
+          userType: result.userType,
+          status: "new",
+        };
+        localStorage.setItem("loginUser", JSON.stringify(loginUser));
+        if (loginUser.userType === "Student") {
+          window.location = "/student-create";
+        }
+        if (loginUser.userType === "Company") {
+          window.location = "/company-create";
+        }
+      } else {
+        createUser((user) => ({
+          ...user,
+          email: "",
+          password: "",
+        }));
       }
     } catch (ex) {
       console.log("Error:", ex.message);
@@ -43,9 +49,7 @@ function SignUp() {
         ...user,
         email: "",
         password: "",
-        userType: "Select User Type",
       }));
-      // window.location = "/signup";
     }
   };
 

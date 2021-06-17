@@ -29,7 +29,6 @@ import UserAccountEdit from "./components/pages/common/UserAccountEdit";
 function App() {
   const [loginUser, setLoginUser] = useState([]);
 
-  // RUN ONCE when the app start
   useEffect(() => {
     getLocal();
   }, []);

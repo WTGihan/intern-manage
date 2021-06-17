@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { getCompanies } from "./../../../services/CompanyService";
-import {
-  getApplications,
-  getApplicationDetails,
-} from "./../../../services/ApplicationService";
+import { getApplications } from "./../../../services/ApplicationService";
 
 function CompanyHome({ loginUser }) {
   const [company, setCompany] = useState({
@@ -40,8 +37,6 @@ function CompanyHome({ loginUser }) {
         const filterApplications = resultStudent.data.filter(
           (data) => data.company.id === id
         );
-
-        // get students
 
         if (filterApplications.length > 0) {
           let allApplyStudents = [];

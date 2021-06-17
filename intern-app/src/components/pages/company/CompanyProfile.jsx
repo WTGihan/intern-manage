@@ -9,10 +9,9 @@ import {
   getStudents,
   getStudentDetails,
 } from "./../../../services/StudentService";
-import { deleteUser, getUsers } from "./../../../services/UserService";
+import { getUsers } from "./../../../services/UserService";
 import {
   getApplications,
-  getApplicationDetails,
   addNewApplication,
 } from "./../../../services/ApplicationService";
 
@@ -20,8 +19,6 @@ function CompanyProfile({ loginUser }) {
   const userType = loginUser.userType;
   const url = window.location.pathname.split("/");
   const viewType = url[2];
-
-  // let alreadyApplications = false;
 
   const [company, setCompany] = useState({
     username: "",
