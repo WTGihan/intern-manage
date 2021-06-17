@@ -1,4 +1,4 @@
-# Intern Mangement Programme System
+# Intern Management Programme System
 
 This project was developed with ***React*** and ***Spring Boot***
 
