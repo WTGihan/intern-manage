@@ -86,7 +86,7 @@ function CompanyHome({ loginUser }) {
                     <th scope="row">{index + 1}</th>
                     <td>{student.username}</td>
                     <td>{student.studentName}</td>
-                    <td>{student.email}</td>
+                    <td>{student.user.email}</td>
                     <td>{student.contactnumber}</td>
                     <td>
                       <Link

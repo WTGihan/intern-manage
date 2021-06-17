@@ -54,7 +54,7 @@ function CompanyCreate() {
   return (
     <div className="container  w-50 m-auto">
       <div className="py-4">
-        <h1 className="text-center setmargin">Student Profile</h1>
+        <h1 className="text-center setmargin">Company Profile</h1>
         <form className="mx-auto" onSubmit={(e) => onSubmit(e)}>
           <div className="form-group row">
             <label className="col-sm-4 col-form-label">Username</label>

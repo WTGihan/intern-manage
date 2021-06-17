@@ -31,15 +31,17 @@ function CompanySelectStudent() {
 
       let students = [];
       for (var key in companyApplication) {
-        let studentResult = companyApplication[key]["student"];
-        let selectStudentDetails = {};
-        selectStudentDetails.studentName = studentResult.studentName;
-        selectStudentDetails.email = studentResult.user.email;
-        selectStudentDetails.contactnumber = studentResult.contactnumber;
-        selectStudentDetails.status =
-          companyApplication[key]["companyAcception"];
+        if (companyApplication[key]["companyAcception"] === "Accepted") {
+          let studentResult = companyApplication[key]["student"];
+          let selectStudentDetails = {};
+          selectStudentDetails.studentName = studentResult.studentName;
+          selectStudentDetails.email = studentResult.user.email;
+          selectStudentDetails.contactnumber = studentResult.contactnumber;
+          selectStudentDetails.status =
+            companyApplication[key]["companyAcception"];
 
-        students.push(selectStudentDetails);
+          students.push(selectStudentDetails);
+        }
       }
       setSelectStudents(students);
     } catch (err) {
@@ -50,7 +52,7 @@ function CompanySelectStudent() {
   return (
     <div className="container">
       <div className="py-4">
-        <h1 className="text-center setmargin">StudentApply Companies Page</h1>
+        <h1 className="text-center setmargin">Company Select Students</h1>
         <table className="table table-striped">
           <thead className="thead-dark">
             <tr>
@@ -72,7 +74,7 @@ function CompanySelectStudent() {
                     <td>{student.contactnumber}</td>
                     <td>
                       {student.status === "Accepted" && (
-                        <div className="btn btn-success">{student.status}</div>
+                        <div className="btn btn-success disabled">Selected</div>
                       )}
                     </td>
                   </tr>

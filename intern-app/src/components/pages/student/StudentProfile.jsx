@@ -121,82 +121,42 @@ function StudentProfile({ loginUser }) {
   };
 
   const acceptStudentByCompany = async (id) => {
-    // const applications = await axios.get("http://localhost:3004/application");
-    const applications = await getApplications();
-    const applicationResult = applications.data;
-
-    // Get company id from
-    const loginUseremail = loginUser.email;
-    // const allCompanies = await axios.get("http://localhost:3004/companies");
-    const allCompanies = await getCompanies();
-    const allCompaniesResult = allCompanies.data;
-
-    let companyId = 0;
-    allCompaniesResult.forEach((data) => {
-      if (data.useremail === loginUseremail) {
-        companyId = data.id;
+    try {
+      const applications = await getApplications();
+      let application = applications.data.filter(
+        (data) =>
+          data.student.id === parseInt(id) &&
+          data.company.user.email === loginUser.email
+      );
+      if (application) {
+        application[0].companyAcception = "Accepted";
       }
-    });
+      await editApplicationDetails(application[0].id, application[0]);
 
-    let newid = parseInt(id);
-    let applicationId;
-    applicationResult.forEach((data) => {
-      if (data.studentId === newid && data.companyId === companyId) {
-        applicationId = data.id;
-      }
-    });
-
-    // const result = await axios.get(
-    //   `http://localhost:3004/application/${applicationId}`
-    // );
-    const result = await getApplicationDetails(applicationId);
-    let application = result.data;
-    application.companyAcception = "Accepted";
-    // await axios.put(`http://localhost:3004/application/${id}`, application);
-    await editApplicationDetails(id, application);
-
-    window.location = "/";
+      window.location = "/";
+    } catch (ex) {
+      console.log("Error:", ex.message);
+    }
   };
 
   const declineStudentByCompany = async (id) => {
-    // const applications = await axios.get("http://localhost:3004/application");
-    const applications = await getApplications();
-    const applicationResult = applications.data;
-
-    // Get company id from
-    const loginUseremail = loginUser.email;
-    // const allCompanies = await axios.get("http://localhost:3004/companies");
-    const allCompanies = await getCompanies();
-    const allCompaniesResult = allCompanies.data;
-
-    let companyId = 0;
-    allCompaniesResult.forEach((data) => {
-      if (data.useremail === loginUseremail) {
-        companyId = data.id;
+    try {
+      const applications = await getApplications();
+      let application = applications.data.filter(
+        (data) =>
+          data.student.id === parseInt(id) &&
+          data.company.user.email === loginUser.email
+      );
+      if (application) {
+        application[0].companyAcception = "Rejected";
       }
-    });
+      await editApplicationDetails(application[0].id, application[0]);
 
-    let newid = parseInt(id);
-    let applicationId;
-    applicationResult.forEach((data) => {
-      if (data.studentId === newid && data.companyId === companyId) {
-        applicationId = data.id;
-      }
-    });
-
-    // const result = await axios.get(
-    //   `http://localhost:3004/application/${applicationId}`
-    // );
-    const result = await getApplicationDetails(applicationId);
-    let application = result.data;
-    application.companyAcception = "Rejected";
-    // await axios.put(`http://localhost:3004/application/${id}`, application);
-    await editApplicationDetails(id, application);
-
-    window.location = "/";
+      window.location = "/";
+    } catch (ex) {
+      console.log("Error:", ex.message);
+    }
   };
-
-  // console.log(applicationStatus);
 
   return (
     <div className="container  w-50 m-auto">
