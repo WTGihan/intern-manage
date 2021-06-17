@@ -1,7 +1,6 @@
 package com.intern.appapi.model;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Entity
 @Table(name="student")

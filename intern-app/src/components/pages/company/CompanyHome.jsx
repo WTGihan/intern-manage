@@ -23,7 +23,6 @@ function CompanyHome({ loginUser }) {
       const loginUserEmail = loginUser.email;
       const result = await getCompanies();
       const allCompanies = result.data;
-      //   console.log(allCompanies);
       const newResult = allCompanies.filter(
         (data) => data.user.email === loginUserEmail
       );

@@ -14,12 +14,12 @@ public class Application {
 
 //    companyId
     @OneToOne()
-    @JoinColumn(name="comapny_id", unique = true)
+    @JoinColumn(name="comapny_id")
     private Company company;
 
 //    studentId
     @OneToOne()
-    @JoinColumn(name = "student_id", unique = true)
+    @JoinColumn(name = "student_id")
     private Student student;
 
     public  Application() {

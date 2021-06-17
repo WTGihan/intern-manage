@@ -22,14 +22,17 @@ function AdminEdit() {
   });
 
   useEffect(() => {
-    const loadAdmin = async () => {
-      // const result = await axios.get(`http://localhost:3004/campusAdmin/${id}`);
-      const result = await getCampusAdminDetails(id);
-      setAdmin(result.data);
-    };
-
     loadAdmin();
   }, []);
+
+  const loadAdmin = async () => {
+    try {
+      const result = await getCampusAdminDetails(id);
+      setAdmin(result.data);
+    } catch (ex) {
+      console.log("Error:", ex.message);
+    }
+  };
 
   const onInputChange = (e) => {
     setAdmin({ ...admin, [e.target.name]: e.target.value });
@@ -37,9 +40,12 @@ function AdminEdit() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    // await axios.put(`http://localhost:3004/campusAdmin/${id}`, admin);
-    await editCampusAdminDetails(id, admin);
-    history.push("/admin-profile");
+    try {
+      await editCampusAdminDetails(id, admin);
+      history.push("/admin-profile");
+    } catch (ex) {
+      console.log("Error:", ex.message);
+    }
   };
 
   return (
