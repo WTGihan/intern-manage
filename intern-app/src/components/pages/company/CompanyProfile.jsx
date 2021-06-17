@@ -123,23 +123,27 @@ function CompanyProfile({ loginUser }) {
   };
 
   const acceptCompany = async (id) => {
-    // const result = await axios.get(`http://localhost:3004/companies/${id}`);
-    const result = await getCompanyDetails(id);
-    let newCompany = result.data;
-    newCompany.adminAcception = "Accepted";
-    // await axios.put(`http://localhost:3004/companies/${id}`, newCompany);
-    await editCompanyDetails(id, newCompany);
-    window.location = "/request-companies";
+    try {
+      const result = await getCompanyDetails(id);
+      let newCompany = result.data;
+      newCompany.adminAcception = "Accepted";
+      await editCompanyDetails(id, newCompany);
+      window.location = "/request-companies";
+    } catch (ex) {
+      console.log("Error", ex.message);
+    }
   };
 
   const declineCompany = async (id) => {
-    // const result = await axios.get(`http://localhost:3004/companies/${id}`);
-    const result = await getCompanyDetails(id);
-    let newCompany = result.data;
-    newCompany.adminAcception = "AdminDeclined";
-    // await axios.put(`http://localhost:3004/companies/${id}`, newCompany);
-    await editCompanyDetails(id, newCompany);
-    window.location = "/request-companies";
+    try {
+      const result = await getCompanyDetails(id);
+      let newCompany = result.data;
+      newCompany.adminAcception = "AdminDeclined";
+      await editCompanyDetails(id, newCompany);
+      window.location = "/request-companies";
+    } catch (ex) {
+      console.log("Error", ex.message);
+    }
   };
 
   const applyForCompany = async (id) => {

@@ -13,7 +13,7 @@ import {
   editApplicationDetails,
 } from "./../../../services/ApplicationService";
 import { getCompanies } from "./../../../services/CompanyService";
-import { getUserDetails, getUsers } from "./../../../services/UserService";
+import { getUsers } from "./../../../services/UserService";
 
 function StudentProfile({ loginUser }) {
   const userType = loginUser.userType;
@@ -25,6 +25,7 @@ function StudentProfile({ loginUser }) {
     username: "",
     adminAcception: "",
     studentName: "",
+    email: "",
     contactnumber: "",
     university: "",
     languageSkill: "",
@@ -58,7 +59,7 @@ function StudentProfile({ loginUser }) {
           var newresult = students.filter((data) => data.user.id === userid);
 
           var studentDetails = newresult[0];
-          setStudent(studentDetails);
+          setStudent({ ...studentDetails, email: studentDetails.user.email });
         }
       } catch (err) {
         console.log("Error", err.message);
@@ -66,7 +67,7 @@ function StudentProfile({ loginUser }) {
     } else {
       try {
         const result = await getStudentDetails(id);
-        setStudent(result.data);
+        setStudent({ ...result.data, email: result.data.user.email });
         if (userType === "Company" && viewType === "viewonly") {
           const applications = await getApplications();
           const applicationStudentAndCompany = applications.data.filter(
@@ -96,23 +97,27 @@ function StudentProfile({ loginUser }) {
   };
 
   const acceptStudent = async (id) => {
-    // const result = await axios.get(`http://localhost:3004/students/${id}`);
-    const result = await getStudentDetails(id);
-    let newStudent = result.data;
-    newStudent.adminAcception = "Accepted";
-    // await axios.put(`http://localhost:3004/students/${id}`, newStudent);
-    await editStudentDetails(id, newStudent);
-    window.location = "/request-students";
+    try {
+      const result = await getStudentDetails(id);
+      let newStudent = result.data;
+      newStudent.adminAcception = "Accepted";
+      await editStudentDetails(id, newStudent);
+      window.location = "/request-students";
+    } catch (ex) {
+      console.log("Error", ex.message);
+    }
   };
 
   const declineStudent = async (id) => {
-    // const result = await axios.get(`http://localhost:3004/students/${id}`);
-    const result = await getStudentDetails(id);
-    let newStudent = result.data;
-    newStudent.adminAcception = "AdminDeclined";
-    // await axios.put(`http://localhost:3004/students/${id}`, newStudent);
-    await editStudentDetails(id, newStudent);
-    window.location = "/request-students";
+    try {
+      const result = await getStudentDetails(id);
+      let newStudent = result.data;
+      newStudent.adminAcception = "AdminDeclined";
+      await editStudentDetails(id, newStudent);
+      window.location = "/request-students";
+    } catch (ex) {
+      console.log("Error", ex.message);
+    }
   };
 
   const acceptStudentByCompany = async (id) => {
@@ -227,6 +232,17 @@ function StudentProfile({ loginUser }) {
                 type="text"
                 className="form-control"
                 value={student.studentName}
+                readOnly
+              />
+            </div>
+          </div>
+          <div className="form-group row">
+            <label className="col-sm-4 col-form-label">Student Email</label>
+            <div className="col-sm-8">
+              <input
+                type="text"
+                className="form-control"
+                value={student.email}
                 readOnly
               />
             </div>
