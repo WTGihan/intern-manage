@@ -1,0 +1,37 @@
+{
+        "username": "WTGihan",
+        "adminAcception": "NotAccepted",
+        "studentName": "Tharindu Gihan",
+        "user": {
+            "id": 1,
+            "userType": "Student",
+            "email": "wtgihan@gmail.com",
+            "password": "sha1$c8310fd8$1$72e9c72033192fd3fb23c1e60a6e86d8317753a9"
+        },
+        "contactnumber": "0778522736",
+        "university": "University of Colombo School of Computing",
+        "languageSkill": "1.C Language\\n2.Java Language\\n3.Javascipt Language",
+        "softSkill": "1.Solving Problem Skill",
+        "projects": "1.Internship Management Project"
+    }
+
+
+//Company
+{
+        "id": 1,
+        "user": {
+            "id": 5,
+            "userType": "Company",
+            "email": "wolfxcodedevelop@gmail.com",
+            "password": "sha1$03c80d11$1$859b645f138aaece1835b24d0f9fd406c70879a4"
+        },
+        "username": "WTGihan",
+        "adminAcception": "Accepted",
+        "companyAdminName": "Tharindu Gihan",
+        "email": "wolfxcodedevelop@gmail.com",
+        "contactnumber": "0778522738",
+        "company": "WolfXCode Lab",
+        "technologies": "1. React.js\\n 2. Node.js \\n 3. Java\\n 4. Mongo DB",
+        "qualificationAndExperience": "1. Computer Science Degree\\n2. Problem Solving Skill",
+        "aboutCompany": "Most highest Valuable company in Sri Lanka"
+    }

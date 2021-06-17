@@ -60,7 +60,7 @@ function StudentApplyCompanies() {
   const deleteStudentCompanyApplication = async (id) => {
     try {
       await deleteApplication(id);
-      window.location = "/";
+      window.location = "/apply-companies";
     } catch (err) {
       console.log("Error", err.message);
     }
@@ -69,7 +69,7 @@ function StudentApplyCompanies() {
   return (
     <div className="container">
       <div className="py-4">
-        <h1 className="text-center setmargin">StudentApply Companies Page</h1>
+        <h1 className="text-center setmargin">Student Apply Companies Page</h1>
         <table className="table table-striped">
           <thead className="thead-dark">
             <tr>
