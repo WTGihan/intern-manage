@@ -1,7 +1,7 @@
 import "./App.css";
 import "../node_modules/bootstrap/dist/css/bootstrap.css";
-import {useState, useEffect} from "react";
-import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import { useState, useEffect } from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Navbar from "./components/layout/Navbar";
 import SignIn from "./components/pages/common/SignIn";
 import SignUp from "./components/pages/common/SignUp";
@@ -23,113 +23,120 @@ import Students from "./components/pages/common/Students";
 import Companies from "./components/pages/common/Companies";
 import StudentApplyCompanies from "./components/pages/student/StudentApplyCompanies";
 import CompanySelectStudent from "./components/pages/company/CompanySelectStudent";
+import UserAccount from "./components/pages/common/UserAccount";
 
 function App() {
-    const [loginUser, setLoginUser] = useState([]);
+  const [loginUser, setLoginUser] = useState([]);
 
-    // RUN ONCE when the app start
-    useEffect(() => {
-        getLocal();
-    }, []);
+  // RUN ONCE when the app start
+  useEffect(() => {
+    getLocal();
+  }, []);
 
-    const getLocal = () => {
-        if (localStorage.getItem("loginUser") === null) {
-            localStorage.setItem("loginUser", JSON.stringify([]));
-        } else {
-            let result = JSON.parse(localStorage.getItem("loginUser"));
-            setLoginUser(result);
-        }
-    };
+  const getLocal = () => {
+    if (localStorage.getItem("loginUser") === null) {
+      localStorage.setItem("loginUser", JSON.stringify([]));
+    } else {
+      let result = JSON.parse(localStorage.getItem("loginUser"));
+      setLoginUser(result);
+    }
+  };
 
-    return (
-        <Router>
-            <div className="App">
-                <Navbar loginUser={loginUser}/>
-                <Switch>
-                    {/* Student */}
-                    <Route
-                        exact
-                        path="/student-profile"
-                        render={(props) => <StudentProfile loginUser={loginUser}/>}
-                    />
-                    <Route exact path="/student-create" component={StudentCreate}/>
-                    <Route
-                        exact
-                        path="/student-profile/edit/:id"
-                        component={StudentEdit}
-                    />
-                    <Route
-                        exact
-                        path="/apply-companies"
-                        component={StudentApplyCompanies}
-                    />
+  return (
+    <Router>
+      <div className="App">
+        <Navbar loginUser={loginUser} />
+        <Switch>
+          {/* Student */}
+          <Route
+            exact
+            path="/student-profile"
+            render={(props) => <StudentProfile loginUser={loginUser} />}
+          />
+          <Route exact path="/student-create" component={StudentCreate} />
+          <Route
+            exact
+            path="/student-profile/edit/:id"
+            component={StudentEdit}
+          />
+          <Route
+            exact
+            path="/apply-companies"
+            component={StudentApplyCompanies}
+          />
 
-                    {/* Company */}
-                    <Route exact path="/company-create" component={CompanyCreate}/>
-                    <Route
-                        exact
-                        path="/company-profile"
-                        render={(props) => <CompanyProfile loginUser={loginUser}/>}
-                    />
-                    <Route
-                        exact
-                        path="/company/view/:id"
-                        render={(props) => <CompanyProfile loginUser={loginUser}/>}
-                    />
-                    <Route
-                        exact
-                        path="/company-profile/edit/:id"
-                        component={CompanyEdit}
-                    />
-                    <Route
-                        exact
-                        path="/select-students"
-                        component={CompanySelectStudent}
-                    />
+          {/* Company */}
+          <Route exact path="/company-create" component={CompanyCreate} />
+          <Route
+            exact
+            path="/company-profile"
+            render={(props) => <CompanyProfile loginUser={loginUser} />}
+          />
+          <Route
+            exact
+            path="/company/view/:id"
+            render={(props) => <CompanyProfile loginUser={loginUser} />}
+          />
+          <Route
+            exact
+            path="/company-profile/edit/:id"
+            component={CompanyEdit}
+          />
+          <Route
+            exact
+            path="/select-students"
+            component={CompanySelectStudent}
+          />
 
-                    {/* Campus Admin */}
-                    <Route
-                        exact
-                        path="/admin-profile"
-                        render={(props) => <AdminProfile loginUser={loginUser}/>}
-                    />
-                    <Route
-                        exact
-                        path="/student/view/:id"
-                        render={(props) => <StudentProfile loginUser={loginUser}/>}
-                    />
-                    <Route
-                        exact
-                        path="/student/viewonly/:id"
-                        render={(props) => <StudentProfile loginUser={loginUser}/>}
-                    />
-                    <Route
-                        exact
-                        path="/company/viewonly/:id"
-                        render={(props) => <CompanyProfile loginUser={loginUser}/>}
-                    />
-                    <Route exact path="/admin-profile/edit/:id" component={AdminEdit}/>
-                    <Route exact path="/request-companies" component={RequestCompanies}/>
-                    <Route exact path="/request-students" component={RequestStudents}/>
+          {/* Campus Admin */}
+          <Route
+            exact
+            path="/admin-profile"
+            render={(props) => <AdminProfile loginUser={loginUser} />}
+          />
+          <Route
+            exact
+            path="/student/view/:id"
+            render={(props) => <StudentProfile loginUser={loginUser} />}
+          />
+          <Route
+            exact
+            path="/student/viewonly/:id"
+            render={(props) => <StudentProfile loginUser={loginUser} />}
+          />
+          <Route
+            exact
+            path="/company/viewonly/:id"
+            render={(props) => <CompanyProfile loginUser={loginUser} />}
+          />
+          <Route exact path="/admin-profile/edit/:id" component={AdminEdit} />
+          <Route exact path="/request-companies" component={RequestCompanies} />
+          <Route exact path="/request-students" component={RequestStudents} />
 
-                    <Route exact path="/students" component={Students}/>
-                    <Route exact path="/companies" component={Companies}/>
+          <Route exact path="/students" component={Students} />
+          <Route exact path="/companies" component={Companies} />
+          <Route
+            exact
+            path="/user"
+            render={(props) => <UserAccount loginUser={loginUser} />}
+          />
 
-                    <Route exact path="/signin" component={SignIn}/>
-                    <Route exact path="/signup" component={SignUp}/>
-                    <Route exact path="/logout" component={Logout}/>
-                    <Route exact path="/about" component={About}/>
-                    <Route
-                        exact
-                        path="/"
-                        render={(props) => <Home loginUser={loginUser}/>}
-                    />
+          <Route exact path="/signin" component={SignIn} />
+          <Route exact path="/signup" component={SignUp} />
+          <Route exact path="/logout" component={Logout} />
+          <Route exact path="/about" component={About} />
 
-                    <Route component={NotFound}/>
-                </Switch>
-            </div>
-        </Router>
-    );
+          <Route
+            exact
+            path="/"
+            render={(props) => <Home loginUser={loginUser} />}
+          />
+
+          <Route component={NotFound} />
+        </Switch>
+      </div>
+    </Router>
+  );
 }
 
 export default App;

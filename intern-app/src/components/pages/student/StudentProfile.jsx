@@ -8,11 +8,8 @@ import {
 } from "./../../../services/StudentService";
 import {
   getApplications,
-  getApplicationDetails,
-  deleteApplication,
   editApplicationDetails,
 } from "./../../../services/ApplicationService";
-import { getCompanies } from "./../../../services/CompanyService";
 import { getUsers } from "./../../../services/UserService";
 
 function StudentProfile({ loginUser }) {
