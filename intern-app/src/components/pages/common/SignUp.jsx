@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import passwordHash from "password-hash";
 import { addNewUser } from "../../../services/UserService";
+import StudentEdit from "./../student/StudentEdit";
 
 function SignUp() {
-  // Email must be unique
-
   const [newuser, createUser] = useState({
     userType: "Select User Type",
     email: "",
@@ -29,17 +28,25 @@ function SignUp() {
       status: "new",
     };
 
-    localStorage.setItem("loginUser", JSON.stringify(loginUser));
-
-    // await axios.post("http://localhost:3004/users", result);
-    await addNewUser(result);
-    if (result.userType === "Student") {
-      window.location = "/student-create";
+    try {
+      await addNewUser(result);
+      localStorage.setItem("loginUser", JSON.stringify(loginUser));
+      if (result.userType === "Student") {
+        window.location = "/student-create";
+      }
+      if (result.userType === "Company") {
+        window.location = "/company-create";
+      }
+    } catch (ex) {
+      console.log("Error:", ex.message);
+      createUser((user) => ({
+        ...user,
+        email: "",
+        password: "",
+        userType: "Select User Type",
+      }));
+      // window.location = "/signup";
     }
-    if (result.userType === "Company") {
-      window.location = "/company-create";
-    }
-    // Campus Admin role pre-created account this no create new account
   };
 
   const { userType, email, password } = newuser;
