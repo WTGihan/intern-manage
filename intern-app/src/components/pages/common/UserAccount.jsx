@@ -52,10 +52,7 @@ function UserAccount({ loginUser }) {
             </div>
           </div>
           <div className="btn-group">
-            <Link
-              className="btn btn-primary"
-              to={`/student-profile/edit/${user.id}`}
-            >
+            <Link className="btn btn-primary" to={`/user/edit/${user.id}`}>
               Edit Account
             </Link>
           </div>

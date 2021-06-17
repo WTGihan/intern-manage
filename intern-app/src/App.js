@@ -24,6 +24,7 @@ import Companies from "./components/pages/common/Companies";
 import StudentApplyCompanies from "./components/pages/student/StudentApplyCompanies";
 import CompanySelectStudent from "./components/pages/company/CompanySelectStudent";
 import UserAccount from "./components/pages/common/UserAccount";
+import UserAccountEdit from "./components/pages/common/UserAccountEdit";
 
 function App() {
   const [loginUser, setLoginUser] = useState([]);
@@ -119,6 +120,11 @@ function App() {
             exact
             path="/user"
             render={(props) => <UserAccount loginUser={loginUser} />}
+          />
+          <Route
+            exact
+            path="/user/edit/:id"
+            render={(props) => <UserAccountEdit loginUser={loginUser} />}
           />
 
           <Route exact path="/signin" component={SignIn} />
